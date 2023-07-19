@@ -12,12 +12,14 @@ const Header = () => {
 
   return (
     <div className="flex  gap-2 bg-amazon_blue text-white px-3 py-2">
+      {/* ======================= Logo Section ======================= */}
       <section name="logo" className="headerHover">
         <div>
           <img className="w-24 mt-2" src={logo} alt="amazon-logo" />
         </div>
       </section>
 
+      {/* ======================= Delivery Address ======================= */}
       <section name="address" className="headerHover">
         <span>
           <PlaceOutlinedIcon style={{ fontSize: "20px", marginTop: "8px" }} />
@@ -29,6 +31,7 @@ const Header = () => {
         </div>
       </section>
 
+      {/* ======================= Search Bar ======================= */}
       <section
         name="searchbar"
         className="h-10 rounded-md flex flex-grow relative items-center"
@@ -80,6 +83,7 @@ const Header = () => {
         </span>
       </section>
 
+      {/* ======================= Account & Login ======================= */}
       <section name="account" className="headerHover">
         <div className="">
           <p className=" text-xs leading-3">Hello, Keshav</p>
@@ -93,6 +97,7 @@ const Header = () => {
         </div>
       </section>
 
+      {/* ======================= Orders ======================= */}
       <section name="orders" className="headerHover">
         <div>
           <p className=" text-xs leading-3">Returns</p>
@@ -100,6 +105,7 @@ const Header = () => {
         </div>
       </section>
 
+      {/* ======================= Cart ======================= */}
       <section
         name="cart"
         className=" flex items-center justify-center relative headerHover"
