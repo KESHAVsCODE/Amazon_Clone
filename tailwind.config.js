@@ -26,14 +26,20 @@ export default {
         amazon_yellow: "#febd69",
         whiteText: "#ffffff",
         lightText: "#ccc",
+        lightGray: "#555",
         quantity_box: "#f0f2f2",
         footerBottom: "#131A22",
       },
+      backgroundColor: {
+        hover_blue: "#1DA1F2",
+      },
       boxShadow: {
         textShadow: "0 0 32px 1px rgba(199, 199, 199, 1)",
-        amazonInput: "0 0 3px 2px rgb(228 121 17 / 50%)"
-        
-      }
+        amazonInput: "0 0 3px 2px rgb(228 121 17 / 50%)",
+      },
+      height: {
+        headerHeight: "60px",
+      },
     },
   },
   plugins: [],

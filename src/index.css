@@ -2,3 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .headerHover {
+    @apply flex  px-2 items-center border border-transparent hover:border-white cursor-pointer duration-100;
+  }
+}
