@@ -5,6 +5,10 @@
 
 @layer components {
   .headerHover {
-    @apply flex px-2 items-center border border-transparent hover:border-white cursor-pointer duration-100;
+    @apply flex px-2 items-center rounded-sm border border-transparent hover:border-white cursor-pointer duration-100;
+  }
+
+  .sideBarItems {
+    @apply text-sm leading-4 font-medium flex items-center justify-between  pt-3 pr-5 pb-3 pl-9 text-lightGray hover:bg-[#eee] hover:text-black;
   }
 }
