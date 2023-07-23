@@ -2,19 +2,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
-// eslint-disable-next-line react/prop-types
-const SideBar = ({ setSideBarVisible: { toggleSideBar } }) => {
-  const sideBarRef = useRef();
-  useEffect(() => {
-    document.addEventListener("click", (e) => {
-      if (e.target.contains(sideBarRef.current)) {
-        //check if targeted div contains the sideBarRef, if we click on parent div then
-        toggleSideBar(); // condition will get true, if we click on any other place then get false.
-      }
-    });
-  });
 
+// eslint-disable-next-line react/prop-types
+const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
   return (
     <div
       className={`w-full h-screen fixed top-0 left-0 bg-amazon_blue bg-opacity-90`}
@@ -33,7 +23,7 @@ const SideBar = ({ setSideBarVisible: { toggleSideBar } }) => {
           <p className=" text-lg font-bold">Hello, Keshav</p>
           <span
             className="absolute text-white  -right-2 "
-            onClick={toggleSideBar}
+            onClick={closeSideBar}
             style={{ transform: "translateX(100%)" }}
           >
             <CloseRoundedIcon

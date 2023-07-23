@@ -1,16 +1,23 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import SideBar from "./SideBar";
-import { useState } from "react";
+import useClickOutside from "../custom-hooks/useClickOutSide";
 const HeaderBottom = () => {
-  const [sideBar, setSideBar] = useState(false);
-
-  const toggleSideBar = () => {
-    setSideBar(!sideBar);
+  const openSideBar = (e) => {
+    e.stopPropagation();
+    setSideBar(true);
   };
+
+  const closeSideBar = () => {
+    setSideBar(false);
+  };
+
+  const [sideBar, setSideBar, sideBarRef] = useClickOutside(false);
+
   return (
     <div>
       <div className="bg-amazon_light flex  items-center text-white text-sm font-medium leading-4">
-        <div className="headerHover ml-3 py-2 gap-1" onClick={toggleSideBar}>
+        {/* this onClick creates the event propagation in upper div*/}
+        <div className="headerHover ml-3 py-2 gap-1" onClick={openSideBar}>
           <span>
             <MenuIcon style={{ lineHeight: "12px" }} />
           </span>
@@ -33,7 +40,9 @@ const HeaderBottom = () => {
           </ul>
         </div>
       </div>
-      {sideBar && <SideBar setSideBarVisible={{ sideBar, toggleSideBar }} />}
+      {sideBar && (
+        <SideBar setSideBarVisible={{ sideBar, closeSideBar, sideBarRef }} />
+      )}
     </div>
   );
 };

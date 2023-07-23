@@ -6,11 +6,19 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useState } from "react";
 import { productCategories } from "../../constants/productCategories";
 import HeaderBottom from "./HeaderBottom";
+import useClickOutside from "../custom-hooks/useClickOutSide";
 
 const Header = () => {
-  const [isCategoryVisible, setCategoryVisible] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  //custom hook for manage the visibility of the product categories
+  const [isCategoryVisible, setCategoryVisible, categoryRef] =
+    useClickOutside(false);
 
+  const openCategory = (e) => {
+    e.stopPropagation();
+    setCategoryVisible(!isCategoryVisible);
+  };
+
+  const [selectedCategory, setSelectedCategory] = useState("All");
   return (
     <>
       <div className="flex  gap-2 bg-amazon_blue text-white px-3 py-2">
@@ -42,7 +50,7 @@ const Header = () => {
         >
           <div
             name="product-category"
-            onClick={() => setCategoryVisible(!isCategoryVisible)}
+            onClick={openCategory}
             className="flex  h-full min-w-fit px-3 items-center justify-center bg-gray-100 hover:bg-gray-300 
                     cursor-pointer text-lightGray rounded rounded-e-none  border-r  border-lightText"
           >
@@ -54,7 +62,7 @@ const Header = () => {
             </span>
 
             {isCategoryVisible && (
-              <div>
+              <div ref={categoryRef}>
                 <ul
                   className=" absolute w-56 h-80 top-10 left-0 overflow-y-scroll overflow-x-hidden 
                 bg-white border-[1px] border-amazon_blue text-black flex-col gap-1 z-50"

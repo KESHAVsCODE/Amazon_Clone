@@ -2,7 +2,7 @@ import Header from "./Header";
 const App = () => {
   return (
     <div className=" ">
-      <Header />
+      <Header />{" "}
     </div>
   );
 };
