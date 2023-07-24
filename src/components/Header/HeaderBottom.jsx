@@ -2,6 +2,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SideBar from "./SideBar";
 import useClickOutside from "../custom-hooks/useClickOutSide";
 const HeaderBottom = () => {
+  //custom hook for maintain open-close component feature
+  const [sideBar, setSideBar, sideBarRef] = useClickOutside(false);
+
   const openSideBar = (e) => {
     e.stopPropagation();
     setSideBar(true);
@@ -11,12 +14,10 @@ const HeaderBottom = () => {
     setSideBar(false);
   };
 
-  const [sideBar, setSideBar, sideBarRef] = useClickOutside(false);
-
   return (
     <div>
       <div className="bg-amazon_light flex  items-center text-white text-sm font-medium leading-4">
-        {/* this onClick creates the event propagation in upper div*/}
+        {/* this onClick creates the event propagation in upper div so that we have to stop that*/}
         <div className="headerHover ml-3 py-2 gap-1" onClick={openSideBar}>
           <span>
             <MenuIcon style={{ lineHeight: "12px" }} />
