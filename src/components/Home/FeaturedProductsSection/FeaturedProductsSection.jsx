@@ -43,7 +43,7 @@ const FeaturedProductsSection = () => {
 
       <div className="flex h-[250px] absolute left-0 right-0 top-0 text-white justify-between ">
         <div
-          className="w-[80px] flex items-center justify-center  active:scale-90"
+          className="w-[80px] flex items-center justify-center  active:scale-90 cursor-pointer"
           onClick={handlePrevProductClick}
         >
           <ArrowBackIosIcon
@@ -54,7 +54,7 @@ const FeaturedProductsSection = () => {
           />
         </div>
         <div
-          className="w-[80px] flex items-center justify-center active:scale-90"
+          className="w-[80px] flex items-center justify-center active:scale-90 cursor-pointer"
           onClick={handleNextProductClick}
         >
           <ArrowForwardIosIcon

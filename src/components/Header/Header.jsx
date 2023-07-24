@@ -65,7 +65,7 @@ const Header = () => {
               <div ref={categoryRef}>
                 <ul
                   className=" absolute w-56 h-80 top-10 left-0 overflow-y-scroll overflow-x-hidden 
-                bg-white border-[1px] border-amazon_blue text-black flex-col gap-1 z-50"
+                bg-white border-[1px] border-amazon_blue text-black flex-col gap-1 z-[999]"
                 >
                   {productCategories.map((category, index) => (
                     <li

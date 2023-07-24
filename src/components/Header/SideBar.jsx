@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
   return (
     <div
-      className={`w-full h-screen fixed top-0 left-0 bg-amazon_blue bg-opacity-90`}
+      className={`w-full h-screen fixed top-0 left-0 bg-amazon_blue bg-opacity-90 z-[9999]`}
     >
       <motion.div
         ref={sideBarRef}

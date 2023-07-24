@@ -11,4 +11,11 @@
   .sideBarItems {
     @apply text-sm leading-4 font-medium flex items-center justify-between  pt-3 pr-5 pb-3 pl-9 text-lightGray hover:bg-[#eee] hover:text-black;
   }
+  .footerLink {
+    @apply text-sm font-normal tracking-wide hover:text-gray-100 cursor-pointer hover:underline duration-150;
+  }
+  .footerItemHover {
+    @apply flex gap-1 items-center justify-center border border-gray-500
+           hover:border-amazon_yellow cursor-pointer duration-200 px-2 py-1;
+  }
 }
