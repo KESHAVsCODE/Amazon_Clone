@@ -1,6 +1,6 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import SideBar from "./SideBar";
-import useClickOutside from "../custom-hooks/useClickOutSide";
+import useClickOutside from "../custom-hooks/useClickOutside";
 const HeaderBottom = () => {
   //custom hook for maintain open-close component feature
   const [sideBar, setSideBar, sideBarRef] = useClickOutside(false);

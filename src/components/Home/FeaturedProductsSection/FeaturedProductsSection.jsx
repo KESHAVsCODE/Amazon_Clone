@@ -33,7 +33,7 @@ const FeaturedProductsSection = () => {
   };
 
   return (
-    <section name="home-featured" className="relative">
+    <section name="home-featured" className="relative z-10">
       <div name="featured-product">
         <img
           src={featuredProducts[featuredProductIndex]}

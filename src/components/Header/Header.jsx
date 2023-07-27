@@ -6,7 +6,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useState } from "react";
 import { productCategories } from "../../constants/productCategories";
 import HeaderBottom from "./HeaderBottom";
-import useClickOutside from "../custom-hooks/useClickOutSide";
+import useClickOutside from "../custom-hooks/useClickOutside";
 
 const Header = () => {
   //custom hook for manage the visibility of the product categories
@@ -21,7 +21,7 @@ const Header = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   return (
     <>
-      <div className="flex  gap-2 bg-amazon_blue text-white px-3 py-2">
+      <div className="flex  gap-2 bg-amazon_blue text-white sticky top-0 left-0 right-0 px-3 py-2  z-[9990]">
         {/* ======================= Logo Section ======================= */}
         <section name="logo" className="headerHover">
           <div>

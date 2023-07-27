@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App";
+// import firebaseConfig from "./firebase.config";
+// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

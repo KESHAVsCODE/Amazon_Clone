@@ -15,7 +15,7 @@ const FooterTop = () => {
           </p>
         </div>
       </div>
-      <div className="text-center text-sm bg-[hsl(200,30%,35%)] mt-4 text-[#fff] font-medium hover:bg-opacity-90 cursor-pointer">
+      <div className="text-center text-sm bg-[#37475a] mt-4 text-[#fff] font-medium hover:bg-opacity-90 cursor-pointer">
         <a href="#" className=" block py-4">
           Back to top
         </a>

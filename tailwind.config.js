@@ -29,13 +29,18 @@ export default {
         lightGray: "#555",
         quantity_box: "#f0f2f2",
         footerBottom: "#131A22",
+        amazonButton: "#0f1111",
+        amazonBorder: "#d5d9d9",
       },
       backgroundColor: {
         hover_blue: "#1DA1F2",
+        amazon_button: "#ffd814",
+        amazon_button_hover: "#f7ca00",
       },
       boxShadow: {
         textShadow: "0 0 32px 1px rgba(199, 199, 199, 1)",
         amazonInput: "0 0 3px 2px rgb(228 121 17 / 50%)",
+        amazonButtonShadow: "0 3px 5px 0px rgba(213,217,217,.5)",
       },
       height: {
         headerHeight: "60px",

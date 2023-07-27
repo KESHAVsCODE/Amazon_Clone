@@ -18,6 +18,18 @@ const FooterBottom = () => {
           })}
         </div>
       </div>
+      <div>
+        <div className="flex justify-center gap-4 mt-10 mb-[2px] text-[#DDD] text-[12px] font-semibold">
+          <h3 className="hover:underline ">Condition of Use & Sale</h3>
+          <h3 className="hover:underline ">Privacy Notice</h3>
+          <h3 className=" hover:underline ">Interest-Based Ads</h3>
+        </div>
+        <div className="text-center">
+          <h3 className="font-semibold text-[12px] text-[#DDD] mb-[2px]">
+            © 1996-2023, Amazon.com, Inc. or its affiliates
+          </h3>
+        </div>
+      </div>
     </div>
   );
 };
