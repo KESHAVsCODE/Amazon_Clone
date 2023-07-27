@@ -6,6 +6,10 @@ import bannerImg3 from "./banner/bannerImgThree.jpg";
 import bannerImg4 from "./banner/bannerImgFour.jpg";
 import bannerImg5 from "./banner/bannerImgFive.jpg";
 import indiaFlag from "./india-flag.png";
+import lockImg from "./lock.png";
+import addressImg from "./address.png";
+import boxImg from "./box.png";
+import wishlistImg from "./wishlist.png";
 
 export {
   logo,
@@ -16,4 +20,8 @@ export {
   bannerImg4,
   bannerImg5,
   indiaFlag,
+  lockImg,
+  boxImg,
+  addressImg,
+  wishlistImg,
 };

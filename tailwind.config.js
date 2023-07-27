@@ -31,6 +31,7 @@ export default {
         footerBottom: "#131A22",
         amazonButton: "#0f1111",
         amazonBorder: "#d5d9d9",
+        error: "#c40000",
       },
       backgroundColor: {
         hover_blue: "#1DA1F2",
