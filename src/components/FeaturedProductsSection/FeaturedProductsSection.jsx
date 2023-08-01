@@ -7,7 +7,7 @@ import {
   bannerImg3,
   bannerImg4,
   bannerImg5,
-} from "../../../assets/images";
+} from "../../assets/images";
 
 const featuredProducts = [
   bannerImg1,

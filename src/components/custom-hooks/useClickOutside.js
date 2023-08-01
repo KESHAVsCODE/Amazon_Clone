@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 const useClickOutside = (initialState) => {
   const ref = useRef(null);
+
   const [isOpen, setIsOpen] = useState(initialState);
 
   const handleOutSideClick = (e) => {

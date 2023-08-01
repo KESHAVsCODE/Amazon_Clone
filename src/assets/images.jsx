@@ -10,6 +10,7 @@ import lockImg from "./lock.png";
 import addressImg from "./address.png";
 import boxImg from "./box.png";
 import wishlistImg from "./wishlist.png";
+import errorSign from "./error.png";
 
 export {
   logo,
@@ -24,4 +25,5 @@ export {
   boxImg,
   addressImg,
   wishlistImg,
+  errorSign,
 };

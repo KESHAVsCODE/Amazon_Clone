@@ -8,6 +8,8 @@ import { productCategories } from "../../constants/productCategories";
 import HeaderBottom from "./HeaderBottom";
 import useClickOutside from "../custom-hooks/useClickOutside";
 
+import { NavLink } from "react-router-dom";
+
 const Header = () => {
   //custom hook for manage the visibility of the product categories
   const [isCategoryVisible, setCategoryVisible, categoryRef] =
@@ -21,12 +23,15 @@ const Header = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   return (
     <>
-      <div className="flex  gap-2 bg-amazon_blue text-white sticky top-0 left-0 right-0 px-3 py-2  z-[9990]">
+      <div className="flex items-center h-[60px] gap-2 bg-amazon_blue text-white sticky top-0 left-0 right-0 px-3 py-[5px]  z-[9990]">
         {/* ======================= Logo Section ======================= */}
+
         <section name="logo" className="headerHover">
-          <div>
-            <img className="w-24 mt-2" src={logo} alt="amazon-logo" />
-          </div>
+          <NavLink to="/">
+            <div>
+              <img className="w-24 mt-2" src={logo} alt="amazon-logo" />
+            </div>
+          </NavLink>
         </section>
 
         {/* ======================= Delivery Address ======================= */}
@@ -96,40 +101,46 @@ const Header = () => {
         </section>
 
         {/* ======================= Account & Login ======================= */}
-        <section name="account" className="headerHover">
-          <div className="">
-            <p className=" text-xs leading-3">Hello, Keshav</p>
-            <p className=" text-sm font-bold">Account & Lists</p>
-          </div>
+        <NavLink to="/youraccount">
+          <section name="account" className="headerHover">
+            <div>
+              <p className=" text-xs leading-3">Hello, Keshav</p>
+              <p className=" text-sm font-bold">Account & Lists</p>
+            </div>
 
-          <div className="leading-3">
-            <ArrowDropDownOutlined
-              style={{ fontSize: "18px", marginTop: "14px" }}
-            />
-          </div>
-        </section>
+            <div className="leading-3">
+              <ArrowDropDownOutlined
+                style={{ fontSize: "18px", marginTop: "14px" }}
+              />
+            </div>
+          </section>
+        </NavLink>
 
         {/* ======================= Orders ======================= */}
-        <section name="orders" className="headerHover">
-          <div>
-            <p className=" text-xs leading-3">Returns</p>
-            <p className=" text-sm font-bold">& Orders</p>
-          </div>
-        </section>
+        <NavLink to="/orders">
+          <section name="orders" className="headerHover">
+            <div>
+              <p className=" text-xs leading-3">Returns</p>
+              <p className=" text-sm font-bold">& Orders</p>
+            </div>
+          </section>
+        </NavLink>
 
         {/* ======================= Cart ======================= */}
-        <section
-          name="cart"
-          className=" flex items-center justify-center relative headerHover"
-        >
-          <span>
-            <ShoppingCartOutlinedIcon style={{ fontSize: "1.625rem" }} />
-          </span>
-          <p className="text-xs font-medium mt-3">Cart</p>
-          <span className="absolute flex text-xs font-medium align-center justify-center top-1 left-6 w-4 h-4  bg-[#f3a847] rounded-full">
-            0
-          </span>
-        </section>
+        <NavLink to="/cart">
+          <section
+            name="cart"
+            className=" flex items-center justify-center relative headerHover"
+          >
+            <span>
+              <ShoppingCartOutlinedIcon style={{ fontSize: "1.625rem" }} />
+            </span>
+            <p className="text-xs font-medium mt-3">Cart</p>
+            <span className="absolute flex text-xs font-medium align-center justify-center top-2 left-6 w-4 h-4  bg-[#f3a847] rounded-full">
+              0
+            </span>
+          </section>
+        </NavLink>
       </div>
       <HeaderBottom />
     </>

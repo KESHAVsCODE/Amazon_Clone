@@ -42,6 +42,7 @@ export default {
         textShadow: "0 0 32px 1px rgba(199, 199, 199, 1)",
         amazonInput: "0 0 3px 2px rgb(228 121 17 / 50%)",
         amazonButtonShadow: "0 3px 5px 0px rgba(213,217,217,.5)",
+        errorShadow: "0 0 0 4px rgb(252, 240, 240) inset;",
       },
       height: {
         headerHeight: "60px",

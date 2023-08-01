@@ -18,7 +18,6 @@ const Product = () => {
           throw new Error(`API failed status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
         setProductsData(data);
       } catch (error) {
         console.log("Error is", error.message);
@@ -30,11 +29,11 @@ const Product = () => {
 
   if (loading) return <h1>Loading...</h1>;
   return (
-    <div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10 xl:gap-4 px-4">
+    <div className="bg-gray-100 max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10 xl:gap-4 px-4">
       {productsData.map((item) => (
         <div
           key={item.id}
-          className="bg-white h-auto border-[1px] border-gray-200 py-6 z-30 hover:border-transparent shadow-none hover:shadow-testShadow duration-200 relative flex flex-col gap-4"
+          className="bg-white h-auto border-[1px] border-gray-200 py-6 z-30 hover:border-transparent shadow-none hover:shadow-textShadow duration-200 relative flex flex-col gap-4"
         >
           <span className="text-xs capitalize italic absolute top-2 right-2 text-gray-500">
             {item.category}

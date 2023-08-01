@@ -1,14 +1,31 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { logoDark } from "../../assets/images";
 import SignBottom from "./SignBottom";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import { NavLink } from "react-router-dom";
+import Error from "./Error";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { app } from "../../firebase.config";
+
 const CreateAccount = () => {
-  const [userDetails, setUserDetails] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
-  });
+  const [isLoading, setLoading] = useState(false);
+  const [isSignupSuccess, setSignupSuccess] = useState("Pending");
+
+  const navigate = useNavigate();
+
+  const auth = getAuth();
+
+  const nameRef = useRef({});
+  const emailRef = useRef({});
+  const phoneRef = useRef({});
+  const passwordRef = useRef({});
 
   const [userDetailsErrors, setUserDetailsErrors] = useState({
     nameError: "",
@@ -17,10 +34,12 @@ const CreateAccount = () => {
     passwordError: "",
   });
 
-  const handleInputChange = (event) => {
-    const { id, value } = event.target;
-    setUserDetails({ ...userDetails, [id]: value });
-  };
+  // const resetInputField = () => {
+  //   nameRef.current.value = "";
+  //   emailRef.current.value = "";
+  //   phoneRef.current.value = "";
+  //   passwordRef.current.value = "";
+  // };
 
   const isValidEmail = (email) => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -28,8 +47,13 @@ const CreateAccount = () => {
     // Check if the email matches the pattern
     return emailPattern.test(email);
   };
+
   const handleFormSubmitClick = () => {
-    const { name, email, phone, password } = userDetails;
+    const name = nameRef.current.value;
+    const email = emailRef.current.value;
+    const phone = phoneRef.current.value;
+    const password = passwordRef.current.value;
+
     const errors = {
       nameError: name ? "" : "Enter your name",
       emailError: email
@@ -48,23 +72,90 @@ const CreateAccount = () => {
           : "Passwords must be at least 6 characters"
         : "Enter your password",
     };
-    setUserDetailsErrors({ ...errors });
-    console.log(userDetails);
+
+    if (
+      errors.nameError ||
+      errors.emailError ||
+      errors.phoneError ||
+      errors.passwordError
+    ) {
+      setUserDetailsErrors({ ...errors });
+      setSignupSuccess("Pending");
+      return;
+    } else {
+      //if error not exists this will remove the previous errors
+      setUserDetailsErrors({ ...errors });
+    }
+
+    //registration started
+    setLoading(true);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+
+        // Set the user's name (displayName)
+        updateProfile(user, {
+          displayName: name,
+          photoURL: "", // You can optionally set a photo URL as well
+        })
+          .then(() => {
+            console.log("Name (displayName) set successfully.");
+          })
+          .catch((error) => {
+            console.error("Error setting name (displayName):", error);
+          });
+
+        //registration successful
+        setLoading(false);
+        setSignupSuccess("Success");
+
+        setTimeout(() => {
+          setSignupSuccess("Pending");
+          navigate("/signin");
+        }, 2000);
+
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+
+        //registration failed
+        setLoading(false);
+        setSignupSuccess("Failed");
+      });
   };
 
   return (
     <div className="h-screen ">
       <section className="w-[350px] mx-auto flex flex-col items-center">
-        <div>
-          <img className="w-32 py-2" src={logoDark} alt="website-logo" />
-        </div>
+        <NavLink to="/">
+          <div>
+            <img className="w-32 py-2" src={logoDark} alt="website-logo" />
+          </div>
+        </NavLink>
+
+        {isLoading ? (
+          <h1 className="text-lg mx-auto">Loading...</h1>
+        ) : isSignupSuccess === "Success" ? (
+          <div
+            className={`fixed bottom-4 right-4 p-4 bg-green-500 rounded shadow-lg transition-opacity duration-500`}
+          >
+            Registration successful!
+          </div>
+        ) : isSignupSuccess === "Failed" ? (
+          <Error email={emailRef.current.value} />
+        ) : (
+          ""
+        )}
 
         <section className="border border-amazonBorder rounded-lg px-6 py-4">
           <form
+            noValidate
             action=""
             className="grid gap-3"
             onSubmit={(e) => e.preventDefault()}
-            onChange={handleInputChange}
           >
             <h2 className="text-[28px] font-medium">Create Account</h2>
 
@@ -78,7 +169,7 @@ const CreateAccount = () => {
                 name="name"
                 id="name"
                 placeholder="First and last name"
-                value={userDetails.name}
+                ref={nameRef}
               />
               {userDetailsErrors.nameError && (
                 <p className="flex gap-2 items-center text-xs text-error">
@@ -98,7 +189,7 @@ const CreateAccount = () => {
                 name="email"
                 id="email"
                 placeholder="Email"
-                value={userDetails.email}
+                ref={emailRef}
               />
               {userDetailsErrors.emailError && (
                 <p className="flex gap-2 items-center text-xs text-error">
@@ -118,7 +209,7 @@ const CreateAccount = () => {
                 name="phone"
                 id="phone"
                 placeholder="Mobile number"
-                value={userDetails.phone}
+                ref={phoneRef}
               />
               {userDetailsErrors.phoneError && (
                 <p className="flex gap-2 items-center text-xs text-error">
@@ -141,7 +232,7 @@ const CreateAccount = () => {
                 name="password"
                 id="password"
                 placeholder="At least 6 characters"
-                value={userDetails.password}
+                ref={passwordRef}
               />
               {userDetailsErrors.passwordError ? (
                 <p className="flex gap-2 items-center text-xs text-error">
@@ -172,13 +263,17 @@ const CreateAccount = () => {
             </button>
           </form>
           <div className="mt-8 pt-5 border-t-[1px] bg-zinc-100 bg-gradient-to-t from-white via-white to-zinc-100">
-            <p className="text-sm">
-              Already have an account?{" "}
-              <span className="defaultLink">
-                Sign in
-                <ArrowRightIcon style={{ fontSize: "16px" }} />
-              </span>
-            </p>
+            <NavLink to="/signin">
+              <p className="text-sm">
+                Already have an account?{" "}
+                <span className="defaultLink">
+                  Sign in
+                  <ArrowRightIcon
+                    style={{ fontSize: "16px", marginBottom: "2px" }}
+                  />
+                </span>
+              </p>
+            </NavLink>
             <p className="text-xs pt-4">
               By creating an account or logging in, you agree to Amazon’s{" "}
               <a
