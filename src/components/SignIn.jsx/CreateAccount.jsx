@@ -1,11 +1,12 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
+import SignInBottom from "./SignInBottom";
 import { logoDark } from "../../assets/images";
-import SignBottom from "./SignBottom";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { NavLink } from "react-router-dom";
 import Error from "./Error";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { RotatingLines } from "react-loader-spinner";
+import { motion } from "framer-motion";
 
 import {
   getAuth,
@@ -13,10 +14,11 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { app } from "../../firebase.config";
-
+console.log(app);
 const CreateAccount = () => {
   const [isLoading, setLoading] = useState(false);
   const [isSignupSuccess, setSignupSuccess] = useState("Pending");
+  const [registrationError, setRegistrationError] = useState("");
 
   const navigate = useNavigate();
 
@@ -109,6 +111,7 @@ const CreateAccount = () => {
         //registration successful
         setLoading(false);
         setSignupSuccess("Success");
+        setRegistrationError("");
 
         setTimeout(() => {
           setSignupSuccess("Pending");
@@ -124,6 +127,7 @@ const CreateAccount = () => {
         //registration failed
         setLoading(false);
         setSignupSuccess("Failed");
+        setRegistrationError(errorMessage);
       });
   };
 
@@ -137,15 +141,29 @@ const CreateAccount = () => {
         </NavLink>
 
         {isLoading ? (
-          <h1 className="text-lg mx-auto">Loading...</h1>
+          <div className="mb-4">
+            <RotatingLines
+              strokeColor="#febd69"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="50"
+              visible={true}
+            />
+          </div>
         ) : isSignupSuccess === "Success" ? (
-          <div
-            className={`fixed bottom-4 right-4 p-4 bg-green-500 rounded shadow-lg transition-opacity duration-500`}
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className={`fixed bottom-4 right-4 p-4 bg-green-500 rounded shadow-lg`}
           >
             Registration successful!
-          </div>
+          </motion.div>
         ) : isSignupSuccess === "Failed" ? (
-          <Error email={emailRef.current.value} />
+          <Error
+            email={emailRef.current.value}
+            errorMessage={registrationError}
+          />
         ) : (
           ""
         )}
@@ -170,6 +188,7 @@ const CreateAccount = () => {
                 id="name"
                 placeholder="First and last name"
                 ref={nameRef}
+                autoComplete="name"
               />
               {userDetailsErrors.nameError && (
                 <p className="flex gap-2 items-center text-xs text-error">
@@ -190,6 +209,7 @@ const CreateAccount = () => {
                 id="email"
                 placeholder="Email"
                 ref={emailRef}
+                autoComplete="email"
               />
               {userDetailsErrors.emailError && (
                 <p className="flex gap-2 items-center text-xs text-error">
@@ -210,6 +230,7 @@ const CreateAccount = () => {
                 id="phone"
                 placeholder="Mobile number"
                 ref={phoneRef}
+                autoComplete="tel"
               />
               {userDetailsErrors.phoneError && (
                 <p className="flex gap-2 items-center text-xs text-error">
@@ -233,6 +254,7 @@ const CreateAccount = () => {
                 id="password"
                 placeholder="At least 6 characters"
                 ref={passwordRef}
+                autoComplete="current-password"
               />
               {userDetailsErrors.passwordError ? (
                 <p className="flex gap-2 items-center text-xs text-error">
@@ -297,7 +319,7 @@ const CreateAccount = () => {
           </div>
         </section>
       </section>
-      <SignBottom />
+      <SignInBottom />
     </div>
   );
 };

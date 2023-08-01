@@ -1,11 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 // import thunk from "redux-thunk";
-import registrationReducer from "./registration/registrationReducer";
+import signinReducer from "../redux/signin/signinReducer";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension"; // Import composeWithDevTools
 
 const joinedReducer = combineReducers({
-  registerInfo: registrationReducer,
+  signinDetails: signinReducer,
 });
 
 export const store = createStore(

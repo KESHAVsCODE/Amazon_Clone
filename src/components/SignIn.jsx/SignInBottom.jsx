@@ -1,4 +1,4 @@
-const SignBottom = () => {
+const SignInBottom = () => {
   return (
     <div className="w-full my-4 py-5 text-xs text-center border-t-[1px] bg-zinc-100 bg-gradient-to-t from-white via-white to-zinc-100">
       <div className="w-[350px] mx-auto mb-3 flex gap-3 justify-center items-center">
@@ -34,4 +34,4 @@ const SignBottom = () => {
   );
 };
 
-export default SignBottom;
+export default SignInBottom;

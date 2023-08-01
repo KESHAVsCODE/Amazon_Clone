@@ -1,4 +1,5 @@
 const signinInitialState = {
+  loggedIn: "Pending",
   loading: false,
   userDetails: {},
   error: "",
@@ -7,11 +8,22 @@ const signinInitialState = {
 const signinReducer = (state = signinInitialState, action) => {
   switch (action.type) {
     case "signin-started":
-      return { ...state, loading: true };
+      return { ...state, loggedIn: "Pending", loading: true, error: "" };
     case "signin-success":
-      return { ...state, loading: false, userDetails: action.payload };
+      return {
+        ...state,
+        loggedIn: "Success",
+        loading: false,
+        userDetails: action.payload,
+        error: "",
+      };
     case "signin-failed":
-      return { ...state, loading: false, error: action.payload };
+      return {
+        ...state,
+        loggedIn: "Failed",
+        loading: false,
+        error: action.payload,
+      };
     default:
       return state;
   }
