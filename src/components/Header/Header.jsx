@@ -9,8 +9,15 @@ import HeaderBottom from "./HeaderBottom";
 import useClickOutside from "../custom-hooks/useClickOutside";
 
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const userDetails = useSelector((state) => state.signinDetails.userDetails);
+
+  const cartProductCount = useSelector(
+    (state) => state.cartDetails.productsCount
+  );
+
   //custom hook for manage the visibility of the product categories
   const [isCategoryVisible, setCategoryVisible, categoryRef] =
     useClickOutside(false);
@@ -104,7 +111,9 @@ const Header = () => {
         <NavLink to="/youraccount">
           <section name="account" className="headerHover">
             <div>
-              <p className=" text-xs leading-3">Hello, Keshav</p>
+              <p className=" text-xs leading-3">
+                Hello, {userDetails?.name?.split(" ")[0] || "Sign in"}
+              </p>
               <p className=" text-sm font-bold">Account & Lists</p>
             </div>
 
@@ -136,8 +145,11 @@ const Header = () => {
               <ShoppingCartOutlinedIcon style={{ fontSize: "1.625rem" }} />
             </span>
             <p className="text-xs font-medium mt-3">Cart</p>
-            <span className="absolute flex text-xs font-medium align-center justify-center top-2 left-6 w-4 h-4  bg-[#f3a847] rounded-full">
-              0
+            <span
+              className="absolute flex text-[11px] font-medium align-center justify-center top-2 left-6 w-4 h-4 
+                          bg-[#f3a847] rounded-full"
+            >
+              {cartProductCount}
             </span>
           </section>
         </NavLink>

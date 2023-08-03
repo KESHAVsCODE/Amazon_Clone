@@ -9,6 +9,8 @@ import Cart from "./Cart";
 
 import Home from "./Home";
 
+import RequireSignIn from "./RequireSignIn/RequireSignIn";
+
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 const CustomLayout = () => {
@@ -27,8 +29,22 @@ const App = () => {
         <Routes>
           <Route path="/" element={<CustomLayout />}>
             <Route index element={<Home />} />
-            <Route path="youraccount" element={<Account />} />
-            <Route path="orders" element={<Orders />} />
+            <Route
+              path="youraccount"
+              element={
+                <RequireSignIn>
+                  <Account />
+                </RequireSignIn>
+              }
+            />
+            <Route
+              path="orders"
+              element={
+                <RequireSignIn>
+                  <Orders />
+                </RequireSignIn>
+              }
+            />
             <Route path="cart" element={<Cart />} />
           </Route>
           <Route path="signin" element={<SignIn />} />

@@ -1,7 +1,7 @@
 import { logoDark } from "../../assets/images";
 import SignInBottom from "./SignInBottom";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { getAuth } from "firebase/auth";
 
@@ -16,6 +16,8 @@ import { motion } from "framer-motion";
 const SignIn = () => {
   const emailRef = useRef({});
   const passwordRef = useRef({});
+
+  const location = useLocation();
 
   const navigate = useNavigate();
   const auth = getAuth();
@@ -43,7 +45,7 @@ const SignIn = () => {
       setUserDetailsErrors({ ...errors });
     }
 
-    dispatch(userSignin(auth, navigate, { email, password }));
+    dispatch(userSignin(auth, navigate, location, { email, password }));
   };
 
   return (

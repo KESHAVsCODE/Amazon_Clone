@@ -2,9 +2,13 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { useNavigate, NavLink } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
+  const userDetails = useSelector((state) => state.signinDetails.userDetails);
+  const navigate = useNavigate();
   return (
     <div
       className={`w-full h-screen fixed top-0 left-0 bg-amazon_blue bg-opacity-90 z-[9999]`}
@@ -16,11 +20,27 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
         transition={{ duration: 0.5 }}
         className={`w-[365px] h-full bg-white border border-black`}
       >
-        <section className=" bg-amazon_light flex text-white h-[50px] items-center relative">
-          <span className="ml-9 mr-2 leading-3">
-            <AccountCircleIcon style={{ fontSize: "32px" }} />
-          </span>
-          <p className=" text-lg font-bold">Hello, Keshav</p>
+        <section className=" bg-amazon_light flex text-white h-[50px] items-center relative cursor-pointer hover:opacity-90">
+          <div
+            className="flex items-center"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(
+                `${
+                  userDetails?.name
+                    ? (closeSideBar(), "/youraccount")
+                    : "/signin"
+                }`
+              );
+            }}
+          >
+            <span className="ml-9 mr-2 leading-3">
+              <AccountCircleIcon style={{ fontSize: "32px" }} />
+            </span>
+            <p className=" text-lg font-bold">
+              Hello, {userDetails?.name || "Sign In"}
+            </p>
+          </div>
           <span
             className="absolute text-white  -right-2 "
             onClick={closeSideBar}
@@ -189,7 +209,9 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
               <p>Customer Service</p>
             </li>
             <li className="sideBarItems">
-              <p>Sign Out</p>
+              <NavLink to={`${userDetails?.name ? "/signout" : "/signin"}`}>
+                <p>Sign {userDetails?.name ? "Out" : "In"}</p>
+              </NavLink>
             </li>
           </ul>
         </section>

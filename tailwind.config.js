@@ -32,6 +32,8 @@ export default {
         amazonButton: "#0f1111",
         amazonBorder: "#d5d9d9",
         error: "#c40000",
+        amazonGreen: "#007600",
+        link: "#007185",
       },
       backgroundColor: {
         hover_blue: "#1DA1F2",

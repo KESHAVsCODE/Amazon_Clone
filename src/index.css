@@ -9,7 +9,7 @@
   }
 
   .sideBarItems {
-    @apply text-sm leading-4 font-medium flex items-center justify-between  pt-3 pr-5 pb-3 pl-9 text-lightGray hover:bg-[#eee] hover:text-black;
+    @apply text-sm leading-4 font-medium flex items-center justify-between  pt-3 pr-5 pb-3 pl-9 text-lightGray hover:bg-[#eee] hover:text-black cursor-pointer;
   }
   .footerLink {
     @apply text-sm font-normal tracking-wide hover:text-gray-100 cursor-pointer hover:underline duration-150;
@@ -33,5 +33,8 @@
   }
   .errorSign {
     @apply text-base font-bold italic text-error;
+  }
+  .cartButtonLinks {
+    @apply text-link text-xs font-normal tracking-wide cursor-pointer hover:underline duration-150 border-l px-4 border-lightText;
   }
 }

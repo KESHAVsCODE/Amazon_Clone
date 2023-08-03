@@ -12,7 +12,7 @@ export const signinFailed = (payload) => {
   return { type: "signin-failed", payload };
 };
 
-export const userSignin = (auth, navigate, { email, password }) => {
+export const userSignin = (auth, navigate, location, { email, password }) => {
   return (dispatch) => {
     dispatch(signinStart());
     signInWithEmailAndPassword(auth, email, password)
@@ -22,7 +22,7 @@ export const userSignin = (auth, navigate, { email, password }) => {
         dispatch(signinSuccess({ name: user.displayName, email }));
 
         setTimeout(() => {
-          navigate("/");
+          navigate(location?.state?.originPath || "/");
         }, 1000);
       })
       .catch((error) => {
