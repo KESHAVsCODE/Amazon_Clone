@@ -34,6 +34,8 @@ export default {
         error: "#c40000",
         amazonGreen: "#007600",
         link: "#007185",
+        defaultParagraph: "#040f0f",
+        defaultHeading: "#0f1111",
       },
       backgroundColor: {
         hover_blue: "#1DA1F2",

@@ -11,7 +11,7 @@ import addressImg from "./address.png";
 import boxImg from "./box.png";
 import wishlistImg from "./wishlist.png";
 import errorSign from "./error.png";
-
+import emptyCart from "./emptyCart.png";
 export {
   logo,
   logoDark,
@@ -26,4 +26,5 @@ export {
   addressImg,
   wishlistImg,
   errorSign,
+  emptyCart,
 };

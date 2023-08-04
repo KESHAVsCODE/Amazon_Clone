@@ -7,6 +7,7 @@ import Account from "./Account.jsx/Account";
 import Orders from "./Orders";
 import Cart from "./Cart";
 
+import Address from "./Address";
 import Home from "./Home";
 
 import RequireSignIn from "./RequireSignIn/RequireSignIn";
@@ -25,7 +26,7 @@ const CustomLayout = () => {
 const App = () => {
   return (
     <BrowserRouter>
-      <div className=" ">
+      <div className=" overflow-x-auto">
         <Routes>
           <Route path="/" element={<CustomLayout />}>
             <Route index element={<Home />} />
@@ -36,7 +37,9 @@ const App = () => {
                   <Account />
                 </RequireSignIn>
               }
-            />
+            >
+              <Route path="address" element={<Address />} />
+            </Route>
             <Route
               path="orders"
               element={

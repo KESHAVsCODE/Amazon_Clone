@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import yourAccountData from "../../constants/yourAccountData";
 
 const Account = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full p-4">
       <h1 className=" text-3xl pb-4">Your Account</h1>
@@ -8,6 +10,7 @@ const Account = () => {
         {yourAccountData.map((category) => {
           return (
             <div
+              onClick={() => navigate(category.id)}
               key={category.id}
               className="h-[100px] flex border  border-amazonBorder rounded-lg  px-[18px] py-[14px]
                              cursor-pointer hover:bg-zinc-100"

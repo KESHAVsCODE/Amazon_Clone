@@ -14,7 +14,7 @@ const Error = ({ email, errorMessage }) => {
         <p className="text-[13px] font-medium text-[#222]">
           {(error.includes("wrong-password") && "Your password is incorrect") ||
             (error.includes("user-not-found") &&
-              `We cannot find an account with that semail address`) ||
+              `We cannot find an account with that email address`) ||
             (error.includes("email-already-in-use") &&
               `Your provided Email ${email} has already been used. Please use another Email address.`) ||
             (error.includes("too-many-requests") &&
