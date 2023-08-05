@@ -36,17 +36,22 @@ export default {
         link: "#007185",
         defaultParagraph: "#040f0f",
         defaultHeading: "#0f1111",
+        selectBorder: "#D5D9D9",
+        hoverItemSelect: "#e9e9e9",
       },
       backgroundColor: {
         hover_blue: "#1DA1F2",
         amazon_button: "#ffd814",
         amazon_button_hover: "#f7ca00",
+        selectBackground: "#f0f2f2",
       },
       boxShadow: {
         textShadow: "0 0 32px 1px rgba(199, 199, 199, 1)",
         amazonInput: "0 0 3px 2px rgb(228 121 17 / 50%)",
         amazonButtonShadow: "0 3px 5px 0px rgba(213,217,217,.5)",
         errorShadow: "0 0 0 4px rgb(252, 240, 240) inset;",
+        itemSelect: "0px 2px 5px 0px rgba(210,210,210)",
+        inputBoxShadow: "inset 0 1px 2px rgba(15,17,17,.15) ",
       },
       height: {
         headerHeight: "60px",

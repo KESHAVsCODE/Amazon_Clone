@@ -49,8 +49,10 @@ const App = () => {
               }
             />
             <Route path="cart" element={<Cart />} />
+            <Route path="address" element={<Address />} />
           </Route>
           <Route path="signin" element={<SignIn />} />
+
           <Route path="register" element={<CreateAccount />} />
         </Routes>
       </div>
