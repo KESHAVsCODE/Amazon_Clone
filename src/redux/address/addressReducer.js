@@ -10,7 +10,7 @@ const addressReducer = (state = userInitialAddress, action) => {
         userAddresses: [...state.userAddresses, action.payload.address],
         defaultAddress: action.payload.isDefaultAddress
           ? {
-              id: state.userAddresses.length - 1,
+              id: state.userAddresses.length,
               address: action.payload.address,
             }
           : state.defaultAddress,

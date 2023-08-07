@@ -13,7 +13,7 @@ const yourAccountData = [
     image: lockImg,
   },
   {
-    id: "address",
+    id: "addresses",
     title: "Your Addresses",
     content: "Edit address for orders and gifts",
     image: addressImg,

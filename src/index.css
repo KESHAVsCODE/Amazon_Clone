@@ -37,6 +37,9 @@
   .cartButtonLinks {
     @apply text-link text-xs font-normal tracking-wide cursor-pointer hover:underline duration-150 border-l px-4 border-lightText;
   }
+  .navigateButtonLinks {
+    @apply text-link text-xs font-normal tracking-wide cursor-pointer hover:underline duration-150 border-lightText hover:bg-orange-700;
+  }
   .selectItem {
     @apply font-normal bg-selectBackground  shadow-itemSelect border-selectBorder py-1 px-2 border rounded-lg hover:bg-hoverItemSelect outline-none text-slate-800 cursor-pointer;
   }

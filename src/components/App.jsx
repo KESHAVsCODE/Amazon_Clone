@@ -3,13 +3,15 @@ import Footer from "./Footer";
 
 import CreateAccount from "./SignIn.jsx/CreateAccount";
 import SignIn from "./SignIn.jsx/SignIn";
-import Account from "./Account.jsx/Account";
+import YourAccount from "./YourAccount";
 import Orders from "./Orders";
 import Cart from "./Cart";
 
-import AddAddress from "./Address/AddAddress";
-import Address from "./Address/Address";
 import Home from "./Home";
+
+import Account from "./YourAccount/Account";
+import Addresses from "./YourAccount/Addresses";
+import AddAddress from "./YourAccount/Addresses/AddAddress";
 
 import RequireSignIn from "./RequireSignIn/RequireSignIn";
 
@@ -27,28 +29,33 @@ const CustomLayout = () => {
 const App = () => {
   return (
     <BrowserRouter>
-      <div className=" overflow-x-auto">
+      <div className="">
         <Routes>
           <Route path="/" element={<CustomLayout />}>
             <Route index element={<Home />} />
             <Route
               path="youraccount"
               element={
-                <RequireSignIn>
-                  <Account />
-                </RequireSignIn>
+                // <RequireSignIn>
+                //   <YourAccount />
+                // </RequireSignIn>
+                <YourAccount />
               }
-            />
+            >
+              <Route index element={<Account />} />
+              <Route path="addresses" element={<Addresses />} />
+              <Route path="addresses/add_address" element={<AddAddress />} />
+            </Route>
             <Route
               path="orders"
               element={
-                <RequireSignIn>
-                  <Orders />
-                </RequireSignIn>
+                // <RequireSignIn>
+                //   <Orders />
+                // </RequireSignIn>
+                <Orders />
               }
             />
             <Route path="cart" element={<Cart />} />
-            <Route path="address" element={<Address />} />
           </Route>
           <Route path="signin" element={<SignIn />} />
 

@@ -1,12 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import yourAccountData from "../../constants/yourAccountData";
-
+import { useNavigate } from "react-router-dom";
 const Account = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-full p-4">
-      <h1 className=" text-3xl pb-4">Your Account</h1>
-      <div className="mx-auto grid grid-cols-3 gap-5">
+    <div className="w-full">
+      <h1 className=" text-3xl py-4">Your Account</h1>
+      <div className="grid grid-cols-3 gap-5">
         {yourAccountData.map((category) => {
           return (
             <div

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import ErrorIcon from "@mui/icons-material/Error";
-import indianStates from "../../constants/IndianAllStates";
-import { addAddress } from "../../redux/address/addressAction";
+import indianStates from "../../../constants/IndianAllStates";
+import { addAddress } from "../../../redux/address/addressAction";
 import { useDispatch } from "react-redux";
-
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 const AddAddress = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [userAddress, setUserAddress] = useState({
     country: "india",
     name: "",
@@ -18,6 +20,8 @@ const AddAddress = () => {
     state: "",
   });
   const [isDefaultAddress, setIsDefaultAddress] = useState(false);
+
+  const [isAddressAdded, setAddressAdded] = useState(false);
 
   const [userAddressError, setUserAddressError] = useState({
     nameError: "",
@@ -72,6 +76,15 @@ const AddAddress = () => {
     }
   }, [pincode]);
 
+  useEffect(() => {
+    if (isAddressAdded) {
+      setTimeout(() => {
+        setAddressAdded(false);
+        navigate("/youraccount/addresses");
+      }, 2000);
+    }
+  }, [isAddressAdded]);
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
 
@@ -82,7 +95,7 @@ const AddAddress = () => {
     setUserAddress({ ...userAddress, [id]: value });
   };
 
-  const handleAddAddressClick = (e) => {
+  const handleAddAddressClick = () => {
     const errors = {
       nameError: name ? "" : "Please enter a name",
       phoneError: phone
@@ -110,6 +123,8 @@ const AddAddress = () => {
     setUserAddressError(errors);
 
     dispatch(addAddress({ address: userAddress, isDefaultAddress }));
+
+    setAddressAdded(true);
   };
 
   return (
@@ -117,6 +132,16 @@ const AddAddress = () => {
       name="add-new-address"
       className="w-full p-5 mt-5  text-defaultParagraph flex flex-col items-center"
     >
+      {isAddressAdded && (
+        <motion.div
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className={`fixed bottom-4 right-4 p-4 bg-green-500 rounded shadow-lg`}
+        >
+          Address saved!
+        </motion.div>
+      )}
       <div className="w-[500px]">
         <h2 className="text-2xl font-bold text-defaultHeading py-4">
           Add a new address
