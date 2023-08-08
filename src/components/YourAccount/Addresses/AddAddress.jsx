@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const AddAddress = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [userAddress, setUserAddress] = useState({
     country: "india",
     name: "",
@@ -81,7 +82,7 @@ const AddAddress = () => {
       setTimeout(() => {
         setAddressAdded(false);
         navigate("/youraccount/addresses");
-      }, 2000);
+      }, 1000);
     }
   }, [isAddressAdded]);
 

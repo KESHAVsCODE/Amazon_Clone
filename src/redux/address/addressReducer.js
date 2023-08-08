@@ -22,6 +22,11 @@ const addressReducer = (state = userInitialAddress, action) => {
       const defaultAddress =
         state.defaultAddress?.id === action.payload.addressIndex
           ? {}
+          : state.defaultAddress?.id > action.payload.addressIndex // we should decrease the defaultAddress index by one because if we remove anything from addresses array that has addressIndex < defaultAddress index than all addresses index decrease by one
+          ? {
+              id: state.defaultAddress?.id - 1,
+              address: { ...state.defaultAddress?.address },
+            }
           : state.defaultAddress;
       return { userAddresses: [...filteredAddresses], defaultAddress };
     }
@@ -36,6 +41,9 @@ const addressReducer = (state = userInitialAddress, action) => {
           address: defaultAddressData,
         },
       };
+    }
+    case "edit_address": {
+      return state;
     }
     default:
       return state;

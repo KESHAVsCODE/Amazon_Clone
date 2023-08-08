@@ -7,3 +7,6 @@ export const removeAddress = (payload) => {
 export const setAsDefault = (payload) => {
   return { type: "set_as_default", payload };
 };
+export const editAddress = (payload) => {
+  return { type: "edit_address", payload };
+};

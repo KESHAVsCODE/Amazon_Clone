@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import {
   removeAddress,
   setAsDefault,
+  // editAddress,
 } from "../../../redux/address/addressAction";
 
 import { motion } from "framer-motion";
@@ -15,21 +16,18 @@ const Addresses = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // console.log("addressDetails", addressDetails);
 
   const [addressOperationSuccessMessage, setAddressOperationSuccessMessage] =
     useState("");
   useState(false);
 
   const defaultAddressDetails = addressDetails.defaultAddress;
-  // console.log("defaultAddressDetails", defaultAddressDetails);
 
   useEffect(() => {
     if (addressOperationSuccessMessage) {
-      // console.log("Effect");
       setTimeout(() => {
         setAddressOperationSuccessMessage("");
-      }, 2000);
+      }, 1000);
     }
   }, [addressOperationSuccessMessage]);
 
@@ -37,7 +35,7 @@ const Addresses = () => {
     e.stopPropagation();
     const { id } = e.target;
     const addressIndex = e.currentTarget.id;
-    console.log("addressId->", addressIndex, "id->", id);
+
     if (id === "removeAddress") {
       dispatch(removeAddress({ addressIndex: Number(addressIndex) }));
       setAddressOperationSuccessMessage("Address removed!");

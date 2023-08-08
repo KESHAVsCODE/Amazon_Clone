@@ -27,6 +27,7 @@ export default {
         whiteText: "#ffffff",
         lightText: "#ccc",
         lightGray: "#555",
+        littleDarkGray: "#565959",
         quantity_box: "#f0f2f2",
         footerBottom: "#131A22",
         amazonButton: "#0f1111",
