@@ -12,6 +12,7 @@ import Home from "./Home";
 import Account from "./YourAccount/Account";
 import Addresses from "./YourAccount/Addresses";
 import AddAddress from "./YourAccount/Addresses/AddAddress";
+import Checkout from "./Checkout";
 
 // import RequireSignIn from "./RequireSignIn/RequireSignIn";
 
@@ -55,8 +56,10 @@ const App = () => {
                 <Orders />
               }
             />
+            <Route path="checkout" element={<Checkout />} />
             <Route path="cart" element={<Cart />} />
           </Route>
+
           <Route path="signin" element={<SignIn />} />
 
           <Route path="register" element={<CreateAccount />} />

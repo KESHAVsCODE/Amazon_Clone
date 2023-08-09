@@ -3,10 +3,12 @@ import { deleteProduct, updateQuantity } from "../../redux/cart/cartAction";
 import { useEffect, useRef } from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { emptyCart } from "../../assets/images";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const cartDetails = useSelector((state) => state.cartDetails);
   const cartProductsDetails = cartDetails.products;
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   console.log("cart");
@@ -250,7 +252,15 @@ const Cart = () => {
             </span>
           </h2>
 
-          <button className="amazonButton font-normal">Proceed to Buy</button>
+          <button
+            className="amazonButton font-normal"
+            onClick={() => {
+              console.log("navigate to checkout");
+              navigate("/checkout");
+            }}
+          >
+            Proceed to Buy
+          </button>
         </div>
       ) : (
         ""
