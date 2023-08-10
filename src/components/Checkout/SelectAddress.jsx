@@ -3,7 +3,7 @@ import { Search } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const SelectAddress = () => {
+const SelectAddress = ({ setOrderDetails, handleOpenItem }) => {
   const [selectedAddress, setSelectedAddress] = useState({});
   const addressDetails = useSelector((state) => state.addressDetails);
 
@@ -27,6 +27,11 @@ const SelectAddress = () => {
     e.stopPropagation();
     console.log(e.target.checked, "hello");
     setSelectedAddress({ index, address: addressDetails.userAddresses[index] });
+  };
+
+  const handleUseThisAddressClick = () => {
+    handleOpenItem("payment-methods");
+    setOrderDetails({ ...setOrderDetails, deliveryAddress: selectedAddress });
   };
 
   return (
@@ -117,7 +122,12 @@ const SelectAddress = () => {
       </div>
 
       <div className="p-3 bg-gray-100 border-t border-selectBorder">
-        <button className="amazonButton w-max px-3">Use this address</button>
+        <button
+          onClick={handleUseThisAddressClick}
+          className="amazonButton w-max px-3"
+        >
+          Use this address
+        </button>
       </div>
     </div>
   );

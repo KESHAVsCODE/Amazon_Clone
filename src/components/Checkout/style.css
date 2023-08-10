@@ -1,0 +1,23 @@
+/* PaymentMethod.css */
+.payment-method {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.payment-method-logo {
+  width: 40px;
+  height: 24px;
+  background-image: url("https://m.media-amazon.com/images/G/31/payments-portal/r1/issuer-images/sprite-map._CB443317321_.png");
+}
+
+/* Background positions for specific payment methods */
+.visa {
+  background-position: 0px; /* Example coordinates for Visa logo */
+}
+
+.mastercard {
+  background-position: -90px -20px; /* Example coordinates for Mastercard logo */
+}
+
+/* Add more classes and positions for other payment methods */
