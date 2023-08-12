@@ -4,28 +4,29 @@ import { useState } from "react";
 import { logoDark } from "../../assets/images";
 import LockIcon from "@mui/icons-material/Lock";
 import PaymentMethod from "./PaymentMethod";
+import PlaceOrder from "./PlaceOrder";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
-  //const addressDetails = useSelector((state) => state.addressDetails);
-  //const defaultAddressData = addressDetails.defaultAddress;
+  const navigate = useNavigate();
 
   const [openedItem, setOpenedItem] = useState("delivery-address");
 
   const [orderDetails, setOrderDetails] = useState({
-    deliveryAddress: "",
-    paymentMethod: "",
+    deliveryAddress: null,
+    paymentDetails: null,
   });
-
-  console.log(orderDetails);
 
   const handleOpenItem = (value) => {
     setOpenedItem(value);
   };
 
+  console.log(orderDetails.paymentDetails?.method);
+
   return (
     <div className="p-4 font-500">
       <div className="flex justify-around  bg-zinc-100 bg-gradient-to-b from-white via-white to-zinc-100 border-b border-selectBorder">
-        <div>
+        <div className="cursor-pointer" onClick={() => navigate("/")}>
           <img src={logoDark} alt="website-logo" className="w-32" />
         </div>
         <h1 className="text-3xl font-medium text-defaultHeading">Checkout</h1>
@@ -42,24 +43,27 @@ const Checkout = () => {
           >
             <Accordion.Item value="delivery-address">
               <Accordion.Control>
-                {!orderDetails.deliveryAddress ||
-                openedItem === "delivery-address" ? (
-                  <h2 className=" font-medium text-xl text-orange-600">
+                {openedItem === "delivery-address" ? (
+                  <h2 className=" font-medium text-xl text-orange-700">
                     <span className="pr-3">1</span> Select delivery address
                   </h2>
                 ) : (
-                  <div className="flex justify-between">
+                  <div className="grid grid-cols-2">
                     <h2 className=" font-medium text-xl text-defaultHeading">
                       <span className="pr-3">1</span> Delivery address
                     </h2>
-                    <div>
-                      <p>{orderDetails.deliveryAddress.address.name}</p>
-                      <p>{orderDetails.deliveryAddress.address.houseNumber}</p>
-                      <p>{orderDetails.deliveryAddress.address.area}</p>
-                      <p>
-                        {`${orderDetails.deliveryAddress.address.city}, ${orderDetails.deliveryAddress.address.state}, ${orderDetails.deliveryAddress.address.pincode}`}
-                      </p>
-                    </div>
+                    {orderDetails.deliveryAddress?.address && (
+                      <div>
+                        <p>{orderDetails.deliveryAddress.address.name}</p>
+                        <p>
+                          {orderDetails.deliveryAddress.address.houseNumber}
+                        </p>
+                        <p>{orderDetails.deliveryAddress.address.area}</p>
+                        <p>
+                          {`${orderDetails.deliveryAddress.address.city}, ${orderDetails.deliveryAddress.address.state}, ${orderDetails.deliveryAddress.address.pincode}`}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 )}
               </Accordion.Control>
@@ -68,6 +72,7 @@ const Checkout = () => {
                 <SelectAddress
                   setOrderDetails={setOrderDetails}
                   handleOpenItem={handleOpenItem}
+                  orderDetails={orderDetails}
                 />
               </Accordion.Panel>
             </Accordion.Item>
@@ -77,14 +82,28 @@ const Checkout = () => {
               opened={openedItem === "payment-methods"}
             >
               <Accordion.Control>
-                <h2 className=" font-medium text-xl text-orange-600">
-                  <span className="pr-3">2</span> Select a payment method
-                </h2>
+                {openedItem === "payment-methods" ? (
+                  <h2 className=" font-medium text-xl text-orange-700">
+                    <span className="pr-3">2</span> Select a payment method
+                  </h2>
+                ) : (
+                  <div className="grid grid-cols-2">
+                    <h2 className=" font-medium text-xl text-defaultHeading">
+                      <span className="pr-3">2</span> Payment Method
+                    </h2>
+                    {orderDetails.paymentDetails && (
+                      <div>
+                        <p>{orderDetails.paymentDetails.method}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
               </Accordion.Control>
               <Accordion.Panel>
                 <PaymentMethod
                   setOrderDetails={setOrderDetails}
                   handleOpenItem={handleOpenItem}
+                  orderDetails={orderDetails}
                 />
               </Accordion.Panel>
             </Accordion.Item>
@@ -94,13 +113,18 @@ const Checkout = () => {
               opened={openedItem === "place-order"}
             >
               <Accordion.Control>
-                <h2 className=" font-medium text-xl text-orange-600">
-                  <span className="pr-3">3</span> Place your order
-                </h2>
+                {openedItem === "place-order" ? (
+                  <h2 className=" font-medium text-xl text-orange-700">
+                    <span className="pr-3">3</span> Place your order
+                  </h2>
+                ) : (
+                  <h2 className=" font-medium text-xl">
+                    <span className="pr-3">3</span>Your order
+                  </h2>
+                )}
               </Accordion.Control>
               <Accordion.Panel>
-                With new :focus-visible pseudo-class focus ring appears only
-                when user navigates with keyboard
+                <PlaceOrder orderDetails={orderDetails} />
               </Accordion.Panel>
             </Accordion.Item>
           </Accordion>

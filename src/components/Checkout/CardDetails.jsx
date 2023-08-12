@@ -1,11 +1,17 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import ErrorIcon from "@mui/icons-material/Error";
 // eslint-disable-next-line react/prop-types
-const CardDetails = ({ setPaymentMethodDetailsAdded }) => {
+const CardDetails = ({
+  setPaymentMethodDetailsAdded,
+  setPaymentMethodDetails,
+  paymentMethodDetails,
+}) => {
   const years = new Array(20).fill(0);
   const months = new Array(12).fill(0);
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth();
+
   const [cardDetails, setCardDetails] = useState({
     cardNumber: "",
     nameOnCard: "",
@@ -20,6 +26,15 @@ const CardDetails = ({ setPaymentMethodDetailsAdded }) => {
     expiryYearError: "",
   });
 
+  useEffect(() => {
+    setCardDetails({
+      cardNumber: paymentMethodDetails.details.cardNumber || "",
+      nameOnCard: paymentMethodDetails.details.nameOnCard || "",
+      expiryMonth: paymentMethodDetails.details.expiryMonth || "01",
+      expiryYear: paymentMethodDetails.details.expiryYear || currentYear,
+    });
+  }, []);
+
   const handleCardDetailsChange = (e) => {
     const { id, value } = e.target;
     if (id === "cardNumber" && !/^(?!0)[0-9]*$/.test(value)) return;
@@ -27,9 +42,9 @@ const CardDetails = ({ setPaymentMethodDetailsAdded }) => {
     setCardDetails({ ...cardDetails, [id]: value });
   };
 
-  const handleCardDetailsEntered = (e) => {
+  const handleCardDetailsClick = (e) => {
     e.preventDefault();
-    // console.log(cardDetailsErrors, cardDetails);
+
     const errors = {
       cardNumberError: cardDetails.cardNumber
         ? cardDetails.cardNumber.length > 11
@@ -58,6 +73,10 @@ const CardDetails = ({ setPaymentMethodDetailsAdded }) => {
 
     setCardDetailsErrors({ ...errors });
     setPaymentMethodDetailsAdded(true);
+    setPaymentMethodDetails({
+      method: "Credit or Debit card",
+      details: cardDetails,
+    });
   };
 
   return (
@@ -117,7 +136,7 @@ const CardDetails = ({ setPaymentMethodDetailsAdded }) => {
             id="expiryMonth"
             className="selectItem mr-2"
             onChange={handleCardDetailsChange}
-            value={cardDetails.month}
+            value={cardDetails.expiryMonth}
           >
             {months.map((month, index) => (
               <option key={index + 1} value={index + 1}>
@@ -159,7 +178,7 @@ const CardDetails = ({ setPaymentMethodDetailsAdded }) => {
         <button
           type="submit"
           className="amazonButton w-max px-3 py-1 my-2"
-          onClick={handleCardDetailsEntered}
+          onClick={handleCardDetailsClick}
         >
           Enter card details
         </button>

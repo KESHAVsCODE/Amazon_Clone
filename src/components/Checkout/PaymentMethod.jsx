@@ -1,33 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ErrorIcon from "@mui/icons-material/Error";
 import ListOfCards from "./ListOfCards";
 import CardDetails from "./CardDetails";
-const PaymentMethod = ({ setOrderDetails, setOpenedItem }) => {
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+// eslint-disable-next-line react/prop-types
+const PaymentMethod = ({ setOrderDetails, handleOpenItem, orderDetails }) => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
 
   const [isPaymentMethodDetailsAdded, setPaymentMethodDetailsAdded] =
     useState(false);
 
+  const [paymentMethodDetails, setPaymentMethodDetails] = useState({
+    method: "",
+    details: "",
+  });
+
   const [upiId, setUpiId] = useState("");
   const [upiError, setUpiError] = useState("");
 
-  function isValidUPI() {
-    // Regular expression pattern for valid UPI ID
+  const handleUPIClick = () => {
     const upiPattern = /^[a-zA-Z0-9.\-_]{2,49}@[a-zA-Z._]{2,49}$/;
 
-    // Test if the provided upiId matches the pattern
-    console.log(upiId);
-    if (upiPattern.test(upiId)) {
+    if (upiId && upiPattern.test(upiId)) {
       setPaymentMethodDetailsAdded(true);
+      setPaymentMethodDetails({ method: "UPI", details: upiId });
       setUpiError("");
-      return true;
     } else {
       setUpiError("error");
-      return false;
     }
-  }
-  console.log(isPaymentMethodDetailsAdded);
-  const handleUseThisPaymentMethodClick = () => {};
+  };
+
+  useEffect(() => {
+    setUpiError("");
+    if (selectedPaymentMethod !== "cashOnDelivery")
+      setPaymentMethodDetailsAdded(false);
+  }, [selectedPaymentMethod]);
+
+  const handleUseThisPaymentMethodClick = () => {
+    setOrderDetails({
+      ...orderDetails,
+      paymentDetails: paymentMethodDetails,
+    });
+    handleOpenItem("place-order");
+  };
+
   return (
     <div className="border border-selectBorder rounded-lg">
       <h3 className="text-xl font-medium text-defaultHeading m-3 mb-0 pb-1 border-b border-zinc-400">
@@ -44,14 +60,23 @@ const PaymentMethod = ({ setOrderDetails, setOpenedItem }) => {
                 id="creditDebitCard"
                 name="paymentOption"
                 onChange={(e) => {
-                  setPaymentMethodDetailsAdded(false);
                   setSelectedPaymentMethod(e.target.id);
                 }}
               />
               <div>
-                <h3 className="pb-2 text-base font-medium text-defaultHeading">
-                  Credit or debit card
-                </h3>
+                <div className="flex">
+                  <h3 className="pb-2 text-base font-medium text-defaultHeading">
+                    Credit or Debit card
+                  </h3>
+                  {paymentMethodDetails?.method === "Credit or Debit card" && (
+                    <span className="text-[#067d62] px-2">
+                      <CheckCircleIcon
+                        style={{ fontSize: "20px", marginTop: "2px" }}
+                      />
+                    </span>
+                  )}
+                </div>
+
                 <div>
                   <ListOfCards />
                 </div>
@@ -62,6 +87,8 @@ const PaymentMethod = ({ setOrderDetails, setOpenedItem }) => {
               !isPaymentMethodDetailsAdded && (
                 <CardDetails
                   setPaymentMethodDetailsAdded={setPaymentMethodDetailsAdded}
+                  setPaymentMethodDetails={setPaymentMethodDetails}
+                  paymentMethodDetails={paymentMethodDetails}
                 />
               )}
           </li>
@@ -73,14 +100,22 @@ const PaymentMethod = ({ setOrderDetails, setOpenedItem }) => {
               id="UPI"
               name="paymentOption"
               onChange={(e) => {
-                setPaymentMethodDetailsAdded(false);
                 setSelectedPaymentMethod(e.target.id);
               }}
             />
             <div>
-              <h3 className="pb-2 text-base font-medium text-defaultHeading">
-                UPI ID
-              </h3>
+              <div className="flex">
+                <h3 className="pb-2 text-base font-medium text-defaultHeading">
+                  UPI ID
+                </h3>
+                {paymentMethodDetails?.method === "UPI" && (
+                  <span className="text-[#067d62] px-2">
+                    <CheckCircleIcon
+                      style={{ fontSize: "20px", marginTop: "2px" }}
+                    />
+                  </span>
+                )}
+              </div>
               {selectedPaymentMethod === "UPI" &&
                 !isPaymentMethodDetailsAdded && (
                   <div>
@@ -88,6 +123,7 @@ const PaymentMethod = ({ setOrderDetails, setOpenedItem }) => {
                     <input
                       type="email"
                       className="block inputBox w-40"
+                      value={upiId}
                       onChange={(e) => setUpiId(e.target.value)}
                     />
                     {upiError === "error" && (
@@ -99,7 +135,7 @@ const PaymentMethod = ({ setOrderDetails, setOpenedItem }) => {
                       </div>
                     )}
                     <button
-                      onClick={isValidUPI}
+                      onClick={handleUPIClick}
                       className="amazonButton w-max px-2 my-2 py-1"
                     >
                       Verify
@@ -116,14 +152,27 @@ const PaymentMethod = ({ setOrderDetails, setOpenedItem }) => {
               id="cashOnDelivery"
               name="paymentOption"
               onChange={(e) => {
-                setPaymentMethodDetailsAdded(false);
+                setPaymentMethodDetailsAdded(true);
                 setSelectedPaymentMethod(e.target.id);
+                setPaymentMethodDetails({
+                  method: "Cash/Pay on Delivery",
+                  details: "",
+                });
               }}
             />
             <div>
-              <h3 className="text-base font-medium text-defaultHeading">
-                Cash/Pay on Delivery
-              </h3>
+              <div className="flex">
+                <h3 className="pb-2 text-base font-medium text-defaultHeading">
+                  Cash/Pay on Delivery
+                </h3>
+                {paymentMethodDetails?.method === "Cash/Pay on Delivery" && (
+                  <span className="text-[#067d62] px-2">
+                    <CheckCircleIcon
+                      style={{ fontSize: "20px", marginTop: "2px" }}
+                    />
+                  </span>
+                )}
+              </div>
               <p>Cash, UPI and Cards accepted.</p>
             </div>
           </li>
@@ -131,10 +180,14 @@ const PaymentMethod = ({ setOrderDetails, setOpenedItem }) => {
       </div>
       <div className="p-3 bg-gray-100 border-t border-selectBorder">
         <button
+          disabled={!isPaymentMethodDetailsAdded}
+          title="enter payment option details"
           onClick={handleUseThisPaymentMethodClick}
-          className="amazonButton w-max px-3"
+          className={`amazonButton ${
+            isPaymentMethodDetailsAdded || "disabledAmazonButton"
+          } w-max px-3`}
         >
-          Use this address
+          Use this payment method
         </button>
       </div>
     </div>

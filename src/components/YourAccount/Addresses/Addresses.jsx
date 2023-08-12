@@ -1,6 +1,6 @@
 import AddIcon from "@mui/icons-material/Add";
 import { logoDark } from "../../../assets/images";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
@@ -16,7 +16,7 @@ const Addresses = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [addressOperationSuccessMessage, setAddressOperationSuccessMessage] =
     useState("");
   useState(false);
@@ -66,7 +66,12 @@ const Addresses = () => {
       <div className="w-full grid grid-cols-3 gap-4 auto-rows-[250px]">
         <div
           name="add_new_address"
-          onClick={() => navigate("add_address")}
+          ////////////////////////////////////////////////////////////////
+          onClick={() =>
+            navigate("add_address", {
+              state: { originPath: location.pathname },
+            })
+          }
           className="flex flex-col items-center justify-center border-2 border-dashed border-[#ccc] rounded-xl cursor-pointer"
         >
           <AddIcon

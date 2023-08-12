@@ -4,10 +4,11 @@ import indianStates from "../../../constants/IndianAllStates";
 import { addAddress } from "../../../redux/address/addressAction";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const AddAddress = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [userAddress, setUserAddress] = useState({
     country: "india",
@@ -81,7 +82,7 @@ const AddAddress = () => {
     if (isAddressAdded) {
       setTimeout(() => {
         setAddressAdded(false);
-        navigate("/youraccount/addresses");
+        navigate(location.state?.originPath || "/youraccount/addresses");
       }, 1000);
     }
   }, [isAddressAdded]);

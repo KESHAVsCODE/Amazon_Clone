@@ -24,8 +24,8 @@
             placeholder:text-[13px] shadow-inputBoxShadow font-normal;
   }
   .amazonButton {
-    @apply outline-none w-full bg-amazon_button hover:bg-amazon_button_hover rounded-lg py-[6px]
-           text-[13px] font-medium  transform  active:scale-95 transition-all ease-in-out
+    @apply w-full border border-[#fcd200] bg-amazon_button hover:bg-amazon_button_hover rounded-lg py-[6px]
+           text-[13px] font-medium focus:border-[#008296]  duration-150 focus:shadow-activeAmazonButtonShadow 
            shadow-amazonButtonShadow;
   }
   .defaultLink {
@@ -42,5 +42,8 @@
   }
   .selectItem {
     @apply font-normal bg-selectBackground  shadow-itemSelect border-selectBorder py-1 px-2 border rounded-lg hover:bg-hoverItemSelect outline-none text-slate-800 cursor-pointer;
+  }
+  .disabledAmazonButton {
+    @apply bg-[#fffae0] border border-[#ffed94] text-[#6f7373] hover:bg-[#fffae0];
   }
 }

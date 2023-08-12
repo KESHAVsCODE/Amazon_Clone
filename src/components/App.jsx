@@ -56,12 +56,12 @@ const App = () => {
                 <Orders />
               }
             />
-            <Route path="checkout" element={<Checkout />} />
+
             <Route path="cart" element={<Cart />} />
           </Route>
 
           <Route path="signin" element={<SignIn />} />
-
+          <Route path="checkout" element={<Checkout />} />
           <Route path="register" element={<CreateAccount />} />
         </Routes>
       </div>

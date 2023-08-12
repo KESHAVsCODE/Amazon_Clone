@@ -1,14 +1,17 @@
 import { useSelector } from "react-redux";
 import { Search } from "@mui/icons-material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-
-const SelectAddress = ({ setOrderDetails, handleOpenItem }) => {
+import ErrorIcon from "@mui/icons-material/Error";
+// eslint-disable-next-line react/prop-types
+const SelectAddress = ({ setOrderDetails, handleOpenItem, orderDetails }) => {
   const [selectedAddress, setSelectedAddress] = useState({});
   const addressDetails = useSelector((state) => state.addressDetails);
-
+  const location = useLocation();
   const defaultAddressData = addressDetails.defaultAddress;
-  console.log(addressDetails);
+
+  const [isAddressSelectedError, setAddressSelectedError] = useState(false);
+
   useEffect(() => {
     setSelectedAddress(
       addressDetails.defaultAddress?.id
@@ -21,17 +24,21 @@ const SelectAddress = ({ setOrderDetails, handleOpenItem }) => {
         : {}
     );
   }, [addressDetails]);
-  console.log(selectedAddress);
 
   const handleSelectAddressChange = (e, index) => {
     e.stopPropagation();
-    console.log(e.target.checked, "hello");
+
     setSelectedAddress({ index, address: addressDetails.userAddresses[index] });
   };
 
   const handleUseThisAddressClick = () => {
+    if (!selectedAddress?.address) {
+      setAddressSelectedError(true);
+      return;
+    }
+    setAddressSelectedError(false);
+    setOrderDetails({ ...orderDetails, deliveryAddress: selectedAddress });
     handleOpenItem("payment-methods");
-    setOrderDetails({ ...setOrderDetails, deliveryAddress: selectedAddress });
   };
 
   return (
@@ -50,7 +57,6 @@ const SelectAddress = ({ setOrderDetails, handleOpenItem }) => {
                   id={defaultAddressData.id}
                   className="mt-1 cursor-pointer"
                   onChange={(e) => {
-                    console.log("FEF");
                     handleSelectAddressChange(e, defaultAddressData.id);
                   }}
                   checked={selectedAddress?.index === defaultAddressData?.id}
@@ -71,11 +77,6 @@ const SelectAddress = ({ setOrderDetails, handleOpenItem }) => {
               </li>
             )}
             {addressDetails.userAddresses.map((address, index) => {
-              console.log(
-                "defaultAddressData.id",
-                defaultAddressData.id,
-                typeof defaultAddressData.id
-              );
               if (index === defaultAddressData.id) return;
 
               return (
@@ -113,7 +114,10 @@ const SelectAddress = ({ setOrderDetails, handleOpenItem }) => {
         )}
         <div className="flex items-end gap-1 py-4">
           <span className=" text-3xl text-lightText leading-6">+</span>
-          <NavLink to="/youraccount/addresses/add_address">
+          <NavLink
+            to="/youraccount/addresses/add_address"
+            state={{ originPath: location.pathname }}
+          >
             <p className="navigateButtonLinks text-sm leading-4 font-medium">
               Add a new address
             </p>
@@ -128,56 +132,16 @@ const SelectAddress = ({ setOrderDetails, handleOpenItem }) => {
         >
           Use this address
         </button>
+        {isAddressSelectedError && (
+          <div className="flex gap-1 pt-1 items-center text-xs text-error opacity-90 ">
+            <div>
+              <ErrorIcon style={{ fontSize: "20px" }} />
+            </div>
+            <p>Please add a delivery address</p>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 export default SelectAddress;
-// const addressDetails = {
-//   userAddresses: [
-//     {
-//       name: "Keshav Chamria",
-//       houseNumber: "Ward no. 10",
-//       area: "Kharliya road",
-//       city: "Pilibangan",
-//       state: "Rajasthan",
-//       pincode: "335803",
-//       phone: "9057588629",
-//       country: "India",
-//     },
-//     {
-//       name: "Keshav Chamria",
-//       houseNumber: "Ward no. 10",
-//       area: "Kharliya road",
-//       city: "Pilibangan",
-//       state: "Rajasthan",
-//       pincode: "335803",
-//       phone: "9057588629",
-//       country: "India",
-//     },
-//     {
-//       name: "Keshav Chamria",
-//       houseNumber: "Ward no. 10",
-//       area: "Kharliya road",
-//       city: "Pilibangan",
-//       state: "Rajasthan",
-//       pincode: "335803",
-//       phone: "9057588629",
-//       country: "India",
-//     },
-//   ],
-// };
-
-// const defaultAddressData = {
-//   address: {
-//     name: "Keshav Chamria",
-//     houseNumber: "Ward no. 10",
-//     area: "Kharliya road",
-//     city: "Pilibangan",
-//     state: "Rajasthan",
-//     pincode: "335803",
-//     phone: "9057588629",
-//     country: "India",
-//   },
-//   id: 0,
-// };

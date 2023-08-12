@@ -39,6 +39,7 @@ export default {
         defaultHeading: "#0f1111",
         selectBorder: "#D5D9D9",
         hoverItemSelect: "#e9e9e9",
+        checkoutItem: "#c45500",
       },
       backgroundColor: {
         hover_blue: "#1DA1F2",
@@ -53,6 +54,7 @@ export default {
         errorShadow: "0 0 0 4px rgb(252, 240, 240) inset;",
         itemSelect: "0px 2px 5px 0px rgba(210,210,210)",
         inputBoxShadow: "inset 0 1px 2px rgba(15,17,17,.15) ",
+        activeAmazonButtonShadow: "0 0 0 3px #c8f3fa, inset 0 0 0 2px #fff",
       },
       height: {
         headerHeight: "60px",

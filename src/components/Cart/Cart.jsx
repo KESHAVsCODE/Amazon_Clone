@@ -16,36 +16,6 @@ const Cart = () => {
   //create a list of refs to store all input references that are currently present in the cart section
   const quantityInputRef = useRef([]);
 
-  /*============================= handle Update Quantity of the product with useState Approach =======================  */
-
-  // const [quantityInputFields, setQuantityInputFields] = useState(() => {
-  //   const quantityInputFields = {};
-
-  //   for (const item of cartProductsDetails) {
-  //     quantityInputFields[item.product.id] = {
-  //       quantity: item.quantity,
-  //       isUpdateButtonVisible: false,
-  //     };
-  //   }
-
-  //   return quantityInputFields;
-  // });
-
-  // const handleProductQuantityChange = (e) => {
-  //   const { id, value } = e.target;
-
-  //   if (/^[0-9]*$/.test(value)) {
-  //     console.log(value);
-  //     setQuantityInputFields({
-  //       ...quantityInputFields,
-  //       [id]: { quantity: Number(value), isUpdateButtonVisible: true },
-  //     });
-  //   }
-  //   return;
-  // };
-
-  /*============================= handle Update Quantity of the product with useState Approach =======================  */
-
   //every time when component mounted set all input fields with the quantity of each product
   useEffect(() => {
     // console.log("useEffect of Cart");
