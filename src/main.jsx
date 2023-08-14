@@ -5,11 +5,13 @@ import { store } from "./redux/store";
 // import firebaseConfig from "./firebase.config";
 // import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import "./index.css";
-
+import { ProductDataContextProvider } from "./context/ProductDataContextProvider";
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   <Provider store={store}>
-    <App />
+    <ProductDataContextProvider>
+      <App />
+    </ProductDataContextProvider>
   </Provider>
   // </React.StrictMode>
 );

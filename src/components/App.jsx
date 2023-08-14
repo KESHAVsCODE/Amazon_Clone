@@ -14,9 +14,12 @@ import Addresses from "./YourAccount/Addresses";
 import AddAddress from "./YourAccount/Addresses/AddAddress";
 import Checkout from "./Checkout";
 
-// import RequireSignIn from "./RequireSignIn/RequireSignIn";
+import FilteredProducts from "./FilteredProducts";
+
+import RequireSignIn from "./RequireSignIn/RequireSignIn";
 
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import PageNotFound from "./PageNotFound";
 
 const CustomLayout = () => {
   return (
@@ -37,10 +40,9 @@ const App = () => {
             <Route
               path="youraccount"
               element={
-                // <RequireSignIn>
-                //   <YourAccount />
-                // </RequireSignIn>
-                <YourAccount />
+                <RequireSignIn>
+                  <YourAccount />
+                </RequireSignIn>
               }
             >
               <Route index element={<Account />} />
@@ -50,12 +52,12 @@ const App = () => {
             <Route
               path="orders"
               element={
-                // <RequireSignIn>
-                //   <Orders />
-                // </RequireSignIn>
-                <Orders />
+                <RequireSignIn>
+                  <Orders />
+                </RequireSignIn>
               }
             />
+            <Route path="filtered_products" element={<FilteredProducts />} />
 
             <Route path="cart" element={<Cart />} />
           </Route>
@@ -63,6 +65,7 @@ const App = () => {
           <Route path="signin" element={<SignIn />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="register" element={<CreateAccount />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
     </BrowserRouter>

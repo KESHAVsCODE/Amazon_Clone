@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { emptyCart } from "../../assets/images";
 import { useNavigate } from "react-router-dom";
+import RequireSignIn from "../RequireSignIn/RequireSignIn";
 
 const Cart = () => {
   const cartDetails = useSelector((state) => state.cartDetails);
@@ -102,7 +103,7 @@ const Cart = () => {
             <img className="mx-auto" src={emptyCart} alt="empty-cart-image" />
           ) : (
             <ul>
-              {cartProductsDetails.map((item) => {
+              {cartProductsDetails.map((item, index) => {
                 return (
                   <li key={item.product.id} className="flex border-b my-4">
                     <div className="w-[180px] px-6 py-6">
@@ -153,7 +154,7 @@ const Cart = () => {
                               }
                             }}
                             ref={(element) =>
-                              quantityInputRef.current.push(element)
+                              (quantityInputRef.current[index] = element)
                             }
                             className="inputBox text-amazon_blue w-[70px]  border-lightGray rounded"
                           />
@@ -221,16 +222,17 @@ const Cart = () => {
               ${calculateTotalAmount() || "0.00"}
             </span>
           </h2>
-
-          <button
-            className="amazonButton font-normal"
-            onClick={() => {
-              console.log("navigate to checkout");
-              navigate("/checkout");
-            }}
-          >
-            Proceed to Buy
-          </button>
+          <RequireSignIn>
+            <button
+              className="amazonButton font-normal"
+              onClick={() => {
+                console.log("navigate to checkout");
+                navigate("/checkout");
+              }}
+            >
+              Proceed to Buy
+            </button>
+          </RequireSignIn>
         </div>
       ) : (
         ""

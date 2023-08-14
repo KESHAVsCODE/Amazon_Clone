@@ -26,16 +26,13 @@ const HeaderBottom = () => {
         </div>
 
         <ul className="flex h-full">
-          <li className="headerHover">Health, Household & Personal Care</li>
-          <li className="headerHover">Home Improvement</li>
-          <li className="headerHover">Grocery & Gourmet Foods</li>
-          <li className="headerHover">Amazon miniTV</li>
-          <li className="headerHover">Sell</li>
-          <li className="headerHover">Kindle eBooks</li>
-          <li className="headerHover">Audible</li>
-          <li className="headerHover">Books</li>
-          <li className="headerHover">Buy Again</li>
-          <li className="headerHover">Customer Service</li>
+          <li className="headerHover">Electronics</li>
+          <li className="headerHover">Men&apos;s Fashion</li>
+          <li className="headerHover">Women&apos;s Fashion</li>
+          <li className="headerHover">Jewellery</li>
+          <li className="headerHover">Skin Care & Beauty</li>
+          <li className="headerHover">Mobiles</li>
+          <li className="headerHover">Computers</li>
         </ul>
       </div>
       {sideBar && (

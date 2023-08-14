@@ -52,9 +52,11 @@ export default {
         amazonInput: "0 0 3px 2px rgb(228 121 17 / 50%)",
         amazonButtonShadow: "0 3px 5px 0px rgba(213,217,217,.5)",
         errorShadow: "0 0 0 4px rgb(252, 240, 240) inset;",
-        itemSelect: "0px 2px 5px 0px rgba(210,210,210)",
+        itemSelect: "0 2px 5px 0 rgba(210,210,210)",
         inputBoxShadow: "inset 0 1px 2px rgba(15,17,17,.15) ",
         activeAmazonButtonShadow: "0 0 0 3px #c8f3fa, inset 0 0 0 2px #fff",
+        imageShadow: "2px 3px 5px rgba(230, 230, 230, 0.7)",
+        borderBottomShadow: "0 3px 5px 0px #ccc",
       },
       height: {
         headerHeight: "60px",

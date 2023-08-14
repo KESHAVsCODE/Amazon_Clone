@@ -1,15 +1,39 @@
+/* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { placeOrder } from "../../redux/order/orderAction";
-import { useState } from "react";
-// eslint-disable-next-line react/prop-types
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useDisclosure } from "@mantine/hooks";
+import { Modal, useMantineTheme } from "@mantine/core";
+
 const PlaceOrder = ({ orderDetails }) => {
   const cartDetails = useSelector((state) => state.cartDetails);
+  const userDetails = useSelector((state) => state.signinDetails.userDetails);
+
+  const [opened, { open, close }] = useDisclosure(false);
+
   const cartProductsDetails = cartDetails.products;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const theme = useMantineTheme();
+
+  const [isOrderSuccess, setOrderSuccess] = useState(true);
 
   const [isValidOrderDetails, setValidOrderDetails] = useState(false);
+
+  useEffect(() => {
+    if (
+      !orderDetails.deliveryAddress?.address ||
+      !orderDetails.paymentDetails?.method ||
+      !userDetails?.name
+    ) {
+      setValidOrderDetails(false);
+    } else {
+      setValidOrderDetails(true);
+    }
+  }, [orderDetails, userDetails]);
+
   const totalAmount = (() => {
     const totalPrice = cartProductsDetails.reduce(
       (totalPrice, item) => totalPrice + item.product.price * item.quantity,
@@ -35,13 +59,49 @@ const PlaceOrder = ({ orderDetails }) => {
     };
 
     dispatch(placeOrder(order));
+
+    open(true);
+
+    setTimeout(() => {
+      navigate("/");
+      dispatch({ type: "reset_cart" });
+    }, 1000);
   };
   return (
     <div className="w-[300px] mx-auto p-5 bg-white border border-amazonBorder rounded-lg">
+      {isOrderSuccess && (
+        <Modal
+          opened={opened}
+          onClose={close}
+          withCloseButton={false}
+          centered
+          size="auto"
+          padding="0"
+          overlayProps={{
+            color:
+              theme.colorScheme === "dark"
+                ? theme.colors.dark[9]
+                : theme.colors.gray[2],
+            opacity: 0.55,
+            blur: 3,
+          }}
+        >
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className={`relative p-4 bg-green-500 font-medium text-white rounded shadow-lg`}
+          >
+            Order Placed Successfully!
+          </motion.div>
+        </Modal>
+      )}
       <div className="border-b border-[#aaa] pb-1">
         <button
-          disabled={isValidOrderDetails}
-          className="amazonButton font-normal"
+          disabled={!isValidOrderDetails}
+          className={`amazonButton font-normal ${
+            !isValidOrderDetails && "disabledAmazonButton"
+          }`}
           onClick={handlePlaceOrderClick}
         >
           Place your order
