@@ -87,7 +87,12 @@ const FeaturedProductsSection = () => {
               src={productsCategoryImages[0].image}
               alt={productsCategoryImages[0].category}
             />
-            <p className="navigateButtonLinks text-base py-2">Shop Now</p>
+            <p
+              className="navigateButtonLinks text-base py-2"
+              onClick={() => navigate("/filtered_products")}
+            >
+              Shop Now
+            </p>
           </div>
           <div
             key={productsCategoryImages[1].category}
@@ -100,7 +105,12 @@ const FeaturedProductsSection = () => {
               src={productsCategoryImages[1].image}
               alt={productsCategoryImages[1].category}
             />
-            <p className="navigateButtonLinks text-base py-2">Shop Now</p>
+            <p
+              className="navigateButtonLinks text-base py-2"
+              onClick={() => navigate("/filtered_products")}
+            >
+              Shop Now
+            </p>
           </div>
           <div
             key={productsCategoryImages[2].category}
@@ -114,7 +124,12 @@ const FeaturedProductsSection = () => {
               src={productsCategoryImages[2].image}
               alt={productsCategoryImages[2].category}
             />
-            <p className="navigateButtonLinks text-base py-2">Shop Now</p>
+            <p
+              className="navigateButtonLinks text-base py-2"
+              onClick={() => navigate("/filtered_products")}
+            >
+              Shop Now
+            </p>
           </div>
           {userDetails?.name ? (
             <div
@@ -129,7 +144,12 @@ const FeaturedProductsSection = () => {
                 src={productsCategoryImages[3].image}
                 alt={productsCategoryImages[3].category}
               />
-              <p className="navigateButtonLinks text-base py-2">Shop Now</p>
+              <p
+                className="navigateButtonLinks text-base py-2"
+                onClick={() => navigate("/filtered_products")}
+              >
+                Shop Now
+              </p>
             </div>
           ) : (
             <div className="bg-white p-4 h-max shadow-2xl">

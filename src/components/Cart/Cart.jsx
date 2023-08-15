@@ -12,14 +12,12 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  console.log("cart");
 
   //create a list of refs to store all input references that are currently present in the cart section
   const quantityInputRef = useRef([]);
 
   //every time when component mounted set all input fields with the quantity of each product
   useEffect(() => {
-    // console.log("useEffect of Cart");
     cartProductsDetails.forEach((item, index) => {
       quantityInputRef.current[index].value = item.quantity;
     });
@@ -226,7 +224,6 @@ const Cart = () => {
             <button
               className="amazonButton font-normal"
               onClick={() => {
-                console.log("navigate to checkout");
                 navigate("/checkout");
               }}
             >

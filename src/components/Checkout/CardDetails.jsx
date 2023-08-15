@@ -38,7 +38,6 @@ const CardDetails = ({
   const handleCardDetailsChange = (e) => {
     const { id, value } = e.target;
     if (id === "cardNumber" && !/^(?!0)[0-9]*$/.test(value)) return;
-    console.log(value, id);
     setCardDetails({ ...cardDetails, [id]: value });
   };
 
@@ -60,7 +59,6 @@ const CardDetails = ({
       expiryYearError: cardDetails.expiryYear ? "" : "Enter expiry Year",
     };
 
-    console.log(cardDetailsErrors, cardDetails);
     if (
       errors.cardNumberError ||
       errors.nameOnCardError ||

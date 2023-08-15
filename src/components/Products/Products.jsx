@@ -11,17 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import RatingStars from "./RatingStars";
 import ProductDataContext from "../../context/ProductDataContextProvider";
 
-const Product = ({
-  selectedProductCategory = [],
-  sortProductsBy = "",
-  setProductCount,
-  filterByRating = 0,
-}) => {
-  // const navigate = useNavigate();
-
+const Product = ({ filteredProductsData = [] }) => {
   const { listOfProducts } = useContext(ProductDataContext);
-
-  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -30,53 +21,10 @@ const Product = ({
   const [productsData, setProductsData] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
-    /*=========================== filter by category  ===========================*/
-    let filteredProducts = selectedProductCategory?.length
-      ? listOfProducts.filter((product) =>
-          selectedProductCategory.includes(product.category)
-        )
-      : [...listOfProducts];
-
-    switch (sortProductsBy) {
-      case "low_to_high": {
-        filteredProducts.sort(
-          (productA, productB) => productA.price - productB.price
-        );
-        break;
-      }
-      case "high_to_low": {
-        filteredProducts.sort(
-          (productA, productB) => productB.price - productA.price
-        );
-        break;
-      }
-      case "avg_customer_review": {
-        filteredProducts.sort(
-          (productA, productB) => productB.rating.rate - productA.rating.rate
-        );
-        break;
-      }
-    }
-    console.log(filteredProducts, "before");
-
-    /*=========================== filter by rating  ===========================*/
-    filteredProducts =
-      filterByRating > 0
-        ? filteredProducts.filter(
-            (product) => product.rating.rate >= filterByRating
-          )
-        : filteredProducts;
-    console.log(filteredProducts, "after");
-
-    setProductsData([...filteredProducts]);
-
-    console.log("filteredProducts", filteredProducts);
-    setTimeout(() => {
-      setLoading(false);
-      if (setProductCount) setProductCount(filteredProducts.length);
-    }, 1000);
-  }, []);
+    setProductsData(
+      filteredProductsData?.length ? filteredProductsData : listOfProducts
+    );
+  }, [filteredProductsData, listOfProducts]);
 
   const handleAddToCartClick = (e) => {
     e.stopPropagation();
@@ -98,8 +46,6 @@ const Product = ({
       (item) => item.product.id === id
     );
 
-    console.log(isExistsInCart, typeof id);
-
     if (isExistsInCart) {
       dispatch(updateQuantity({ id, quantity: 1 }));
       return;
@@ -107,11 +53,10 @@ const Product = ({
 
     //find which product we need to add in the cart from the productData
     const selectedProduct = productsData.find((product) => product.id === id);
-    console.log(selectedProduct);
     dispatch(addProduct({ product: selectedProduct }));
   };
 
-  if (loading)
+  if (!productsData.length)
     return (
       <Oval
         height={60}

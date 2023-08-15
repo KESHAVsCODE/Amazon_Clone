@@ -1,7 +1,9 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 // import { useLocation } from "react-router-dom";
 import Products from "../Products";
 import RatingStars from "../Products/RatingStars";
+import ProductDataContext from "../../context/ProductDataContextProvider";
+
 const productCategories = [
   "men's clothing",
   "women's clothing",
@@ -10,18 +12,18 @@ const productCategories = [
 ];
 const FilteredProducts = () => {
   // const location = useLocation();
+  const { listOfProducts } = useContext(ProductDataContext);
+  const [productCount, setProductCount] = useState(0);
 
   const [selectedProductCategory, setSelectedProductCategory] = useState([]);
   const [sortProductsBy, setSortProductsBy] = useState("");
   const [filterByRating, setFilterByRating] = useState(0);
 
-  const [productCount, setProductCount] = useState(0);
+  const [filteredProductsData, setFilteredProductsData] = useState([]);
 
   const categoryInputRef = useRef([]);
 
-  console.log(categoryInputRef.current);
-
-  const handleApplyFilterClick = () => {
+  const handleApplyCategoryFilterClick = () => {
     const filteredElement = categoryInputRef.current.filter(
       (element) => element?.checked
     );
@@ -33,7 +35,63 @@ const FilteredProducts = () => {
     setSelectedProductCategory(selectedProductCategory);
   };
 
-  console.log(filterByRating);
+  const applyFilters = (products) => {
+    if (selectedProductCategory?.length > 0) {
+      products = products.filter((product) =>
+        selectedProductCategory?.includes(product.category)
+      );
+    }
+
+    if (filterByRating > 0) {
+      products = products.filter((product) => {
+        const rating = product.rating.rate;
+        let finalRating = Math.floor(rating);
+        let diff = Number((rating - finalRating).toFixed(1));
+        finalRating = finalRating + (diff > 0.7 ? 1 : 0);
+        return finalRating >= filterByRating;
+      });
+    }
+
+    return products;
+  };
+
+  const clearFilters = () => {
+    setSelectedProductCategory([]);
+    categoryInputRef.current.forEach((element) => (element.checked = false));
+    setFilterByRating(0);
+  };
+
+  const applySorting = (products) => {
+    switch (sortProductsBy) {
+      case "low_to_high": {
+        products.sort((productA, productB) => productA.price - productB.price);
+        break;
+      }
+      case "high_to_low": {
+        products.sort((productA, productB) => productB.price - productA.price);
+        break;
+      }
+      case "avg_customer_review": {
+        products.sort(
+          (productA, productB) => productB.rating.rate - productA.rating.rate
+        );
+        break;
+      }
+    }
+    return products;
+  };
+
+  useEffect(() => {
+    // Apply filtering and sorting
+    const filteredData = applyFilters([...listOfProducts]);
+
+    const sortedAndFilteredData = applySorting(filteredData);
+
+    // Update state
+    setFilteredProductsData(sortedAndFilteredData);
+    setProductCount(sortedAndFilteredData?.length);
+  }, [selectedProductCategory, filterByRating, sortProductsBy, listOfProducts]);
+
   return (
     <div className="">
       {/*===================================== sort product section ===================================== */}
@@ -49,7 +107,6 @@ const FilteredProducts = () => {
           <select
             name="sort_by"
             id="sortBy"
-            value={sortProductsBy}
             className="selectItem text-xs"
             onChange={(e) => setSortProductsBy(e.target.value)}
           >
@@ -80,7 +137,7 @@ const FilteredProducts = () => {
               ))}
             </ul>
             <button
-              onClick={handleApplyFilterClick}
+              onClick={handleApplyCategoryFilterClick}
               className="amazonButton text-xs py-1"
             >
               Apply
@@ -142,16 +199,17 @@ const FilteredProducts = () => {
               </li>
             </ul>
           </div>
+          <button
+            onClick={clearFilters}
+            className="amazonButton text-xs py-1 my-4"
+          >
+            Clear All
+          </button>
         </div>
 
         {/*===================================== product section ===================================== */}
         <div className="flex-grow">
-          <Products
-            selectedProductCategory={selectedProductCategory}
-            sortProductsBy={sortProductsBy}
-            setProductCount={setProductCount}
-            filterByRating={filterByRating}
-          />
+          <Products filteredProductsData={filteredProductsData} />
         </div>
       </section>
     </div>

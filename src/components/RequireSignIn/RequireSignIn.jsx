@@ -5,7 +5,6 @@ import { Navigate, useLocation } from "react-router-dom";
 const RequireSignIn = ({ children }) => {
   const userDetails = useSelector((state) => state.signinDetails.userDetails);
   const location = useLocation();
-  console.log(location);
   if (userDetails?.name) return children;
   return <Navigate to="/signin" state={{ originPath: location.pathname }} />;
 };

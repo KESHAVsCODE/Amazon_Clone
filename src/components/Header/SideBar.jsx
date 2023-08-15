@@ -85,7 +85,10 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
                 Digital Content And Devices
               </h3>
             </li>
-            <NavLink to="https://www.amazon.in/gp/browse.html?node=14172468031&ref_=nav_em__shopall_meetalexa_0_2_2_11">
+            <NavLink
+              target="_blank"
+              to="https://www.amazon.in/gp/browse.html?node=14172468031&ref_=nav_em__shopall_meetalexa_0_2_2_11"
+            >
               <li className="sideBarItems">
                 <p className="">Echo & Alexa</p>
                 <span>
@@ -93,7 +96,10 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
                 </span>
               </li>
             </NavLink>
-            <NavLink to="https://www.amazon.in/gp/browse.html?node=12805339031&ref_=nav_em__shopall_catpage_0_2_3_8">
+            <NavLink
+              target="_blank"
+              to="https://www.amazon.in/gp/browse.html?node=12805339031&ref_=nav_em__shopall_catpage_0_2_3_8"
+            >
               <li className="sideBarItems">
                 <p className="">Fire TV</p>
                 <span>
@@ -101,7 +107,10 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
                 </span>
               </li>
             </NavLink>
-            <NavLink to="https://www.amazon.in/gp/browse.html?node=9840097031&ref_=nav_em_sbc_k_allk_0_2_4_8">
+            <NavLink
+              target="_blank"
+              to="https://www.amazon.in/gp/browse.html?node=9840097031&ref_=nav_em_sbc_k_allk_0_2_4_8"
+            >
               <li className="sideBarItems">
                 <p className="">Kindle E-Readers & eBooks</p>
                 <span>
@@ -109,7 +118,10 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
                 </span>
               </li>
             </NavLink>
-            <NavLink to="https://www.amazon.in/gp/browse.html?node=17941593031&ref_=nav_em_adbl_nav_sl_link2_0_2_5_3">
+            <NavLink
+              target="_blank"
+              to="https://www.amazon.in/gp/browse.html?node=17941593031&ref_=nav_em_adbl_nav_sl_link2_0_2_5_3"
+            >
               <li className="sideBarItems">
                 <p className="">Audible AudioBooks</p>
                 <span>
@@ -117,7 +129,10 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
                 </span>
               </li>
             </NavLink>
-            <NavLink to="https://www.primevideo.com/offers/nonprimehomepage/ref=atv_sso_std">
+            <NavLink
+              target="_blank"
+              to="https://www.primevideo.com/offers/nonprimehomepage/ref=atv_sso_std"
+            >
               <li className="sideBarItems">
                 <p className="">Amazon Prime Video</p>
                 <span>
@@ -125,7 +140,10 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
                 </span>
               </li>
             </NavLink>
-            <NavLink to="https://www.amazon.in/music/prime?ref_=nav_em_dmm_in_nav_pc_apm_mlp_0_2_7_2">
+            <NavLink
+              target="_blank"
+              to="https://www.amazon.in/music/prime?ref_=nav_em_dmm_in_nav_pc_apm_mlp_0_2_7_2"
+            >
               <li className="sideBarItems">
                 <p className="">Amazon Prime Music</p>
                 <span>
@@ -143,39 +161,46 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
                 Shop By Category
               </h3>
             </li>
+            <li
+              onClick={(e) => {
+                e.stopPropagation();
+                closeSideBar();
+                navigate("/filtered_products");
+              }}
+            >
+              <li className="sideBarItems">
+                <p className="">Mobiles, Computers</p>
+                <span>
+                  <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
+                </span>
+              </li>
+              <li className="sideBarItems">
+                <p className="">TV, Appliances, Electronics</p>
+                <span>
+                  <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
+                </span>
+              </li>
+              <li className="sideBarItems">
+                <p className="">Men&apos;s Fashion</p>
+                <span>
+                  <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
+                </span>
+              </li>
+              <li className="sideBarItems">
+                <p className="">Women&apos;s Fashion </p>
+                <span>
+                  <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
+                </span>
+              </li>
 
-            <li className="sideBarItems">
-              <p className="">Mobiles, Computers</p>
-              <span>
-                <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
-              </span>
-            </li>
-            <li className="sideBarItems">
-              <p className="">TV, Appliances, Electronics</p>
-              <span>
-                <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
-              </span>
-            </li>
-            <li className="sideBarItems">
-              <p className="">Men&apos;s Fashion</p>
-              <span>
-                <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
-              </span>
-            </li>
-            <li className="sideBarItems">
-              <p className="">Women&apos;s Fashion </p>
-              <span>
-                <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
-              </span>
-            </li>
-            <NavLink to="/filtered_products">
               <li className="sideBarItems">
                 <p className="">See All</p>
                 <span>
                   <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
                 </span>
               </li>
-            </NavLink>
+            </li>
+
             {/* ======== Line Break ======== */}
             <li>
               <hr style={{ color: "#d5dbdb", margin: "5px 0px" }} />
@@ -186,7 +211,10 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
                 Program & Features
               </h3>
             </li>
-            <NavLink to="https://www.amazon.in/gp/browse.html?node=3704982031&ref_=nav_em_sbc_gc_all_0_2_19_2">
+            <NavLink
+              target="_blank"
+              to="https://www.amazon.in/gp/browse.html?node=3704982031&ref_=nav_em_sbc_gc_all_0_2_19_2"
+            >
               <li className="sideBarItems">
                 <p className="">Gift Cards & Mobile Recharges</p>
                 <span>
@@ -194,12 +222,18 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
                 </span>
               </li>
             </NavLink>
-            <NavLink to="https://www.amazon.in/gp/browse.html?node=10894223031&ref_=nav_em_topnav_storetab_lpdin_0_1_1_27">
+            <NavLink
+              target="_blank"
+              to="https://www.amazon.in/gp/browse.html?node=10894223031&ref_=nav_em_topnav_storetab_lpdin_0_1_1_27"
+            >
               <li className="sideBarItems">
                 <p>Amazon Launchpad</p>
               </li>
             </NavLink>
-            <NavLink to="https://www.amazon.in/b?node=14284467031&ref_=nav_em_sbc_desktop_outlet_0_1_1_29">
+            <NavLink
+              target="_blank"
+              to="https://www.amazon.in/b?node=14284467031&ref_=nav_em_sbc_desktop_outlet_0_1_1_29"
+            >
               <li className="sideBarItems">
                 <p>Clearance store</p>
               </li>

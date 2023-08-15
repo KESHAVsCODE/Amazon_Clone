@@ -3,7 +3,6 @@ import { errorSign } from "../../assets/images";
 // eslint-disable-next-line react/prop-types
 const Error = ({ email, errorMessage }) => {
   const error = errorMessage;
-  console.log(errorMessage);
   return (
     <section className="flex gap-3 w-full mb-4 pl-5 py-4 pr-1 border border-error rounded-lg shadow-errorShadow">
       <div>

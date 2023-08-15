@@ -1,9 +1,12 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import SideBar from "./SideBar";
 import useClickOutside from "../custom-hooks/useClickOutside";
+import { useNavigate } from "react-router-dom";
 const HeaderBottom = () => {
   //custom hook for maintain open-close component feature
   const [sideBar, setSideBar, sideBarRef] = useClickOutside(false);
+
+  const navigate = useNavigate();
 
   const openSideBar = (e) => {
     e.stopPropagation();
@@ -25,7 +28,10 @@ const HeaderBottom = () => {
           <span className="">All</span>
         </div>
 
-        <ul className="flex h-full">
+        <ul
+          className="flex h-full"
+          onClick={() => navigate("/filtered_products")}
+        >
           <li className="headerHover">Electronics</li>
           <li className="headerHover">Men&apos;s Fashion</li>
           <li className="headerHover">Women&apos;s Fashion</li>

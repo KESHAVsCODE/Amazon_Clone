@@ -21,8 +21,6 @@ const Checkout = () => {
     setOpenedItem(value);
   };
 
-  console.log(orderDetails.paymentDetails?.method);
-
   return (
     <div className="p-4 font-500">
       <div className="flex justify-around  bg-zinc-100 bg-gradient-to-b from-white via-white to-zinc-100 border-b border-selectBorder">

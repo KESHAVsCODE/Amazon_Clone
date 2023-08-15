@@ -36,13 +36,6 @@ const CreateAccount = () => {
     passwordError: "",
   });
 
-  // const resetInputField = () => {
-  //   nameRef.current.value = "";
-  //   emailRef.current.value = "";
-  //   phoneRef.current.value = "";
-  //   passwordRef.current.value = "";
-  // };
-
   const isValidEmail = (email) => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

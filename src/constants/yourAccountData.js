@@ -1,6 +1,12 @@
 import { lockImg, addressImg, wishlistImg, boxImg } from "../assets/images";
 const yourAccountData = [
   {
+    id: "addresses",
+    title: "Your Addresses",
+    content: "Edit address for orders and gifts",
+    image: addressImg,
+  },
+  {
     id: "orders",
     title: "Your Orders",
     content: "Track, return, or buy things again",
@@ -12,12 +18,7 @@ const yourAccountData = [
     content: "Edit login, name, and email",
     image: lockImg,
   },
-  {
-    id: "addresses",
-    title: "Your Addresses",
-    content: "Edit address for orders and gifts",
-    image: addressImg,
-  },
+
   {
     id: "wishlist",
     title: "Your Wish List",
