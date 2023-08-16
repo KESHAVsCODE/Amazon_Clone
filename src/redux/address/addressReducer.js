@@ -4,6 +4,7 @@ const userInitialAddress = {
 };
 
 const addressReducer = (state = userInitialAddress, action) => {
+  console.log("addressReducer", state);
   switch (action.type) {
     case "add_address":
       return {
@@ -44,6 +45,9 @@ const addressReducer = (state = userInitialAddress, action) => {
     }
     case "edit_address": {
       return state;
+    }
+    case "reset_addresses": {
+      return (state = userInitialAddress);
     }
     default:
       return state;

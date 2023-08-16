@@ -48,15 +48,9 @@ const App = () => {
               <Route index element={<Account />} />
               <Route path="addresses" element={<Addresses />} />
               <Route path="addresses/add_address" element={<AddAddress />} />
+              <Route path="orders" element={<Orders />} />
             </Route>
-            <Route
-              path="orders"
-              element={
-                <RequireSignIn>
-                  <Orders />
-                </RequireSignIn>
-              }
-            />
+
             <Route path="filtered_products" element={<FilteredProducts />} />
 
             <Route path="cart" element={<Cart />} />

@@ -2,13 +2,14 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
   const userDetails = useSelector((state) => state.signinDetails.userDetails);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <div
       className={`w-full h-screen fixed top-0 left-0 bg-amazon_blue bg-opacity-90 z-[9999]`}
@@ -20,9 +21,9 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
         transition={{ duration: 0.5 }}
         className={`w-[365px] h-full bg-white border border-black`}
       >
-        <section className=" bg-amazon_light flex text-white h-[50px] items-center relative cursor-pointer hover:opacity-90">
+        <section className=" bg-amazon_light text-white h-[50px] flex items-center relative cursor-pointer hover:opacity-90">
           <div
-            className="flex items-center"
+            className="flex items-center w-full"
             onClick={(e) => {
               e.stopPropagation();
               navigate(
@@ -37,7 +38,7 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
             <span className="ml-9 mr-2 leading-3">
               <AccountCircleIcon style={{ fontSize: "32px" }} />
             </span>
-            <p className=" text-lg font-bold">
+            <p className=" text-lg font-bold flex-1">
               Hello, {userDetails?.name || "Sign In"}
             </p>
           </div>
@@ -254,11 +255,19 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
               </li>
             </NavLink>
 
-            <li className="sideBarItems">
-              <NavLink to={`${userDetails?.name ? "/signout" : "/signin"}`}>
-                <p>Sign {userDetails?.name ? "Out" : "In"}</p>
+            {userDetails?.name ? (
+              <li className="sideBarItems">
+                <p onClick={() => dispatch({ type: "reset_store" })}>
+                  Sign Out
+                </p>
+              </li>
+            ) : (
+              <NavLink to="/signin">
+                <li className="sideBarItems">
+                  <p>Sign In</p>
+                </li>
               </NavLink>
-            </li>
+            )}
           </ul>
         </section>
       </motion.div>

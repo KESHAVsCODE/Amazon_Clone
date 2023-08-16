@@ -4,10 +4,10 @@ import { useEffect, useRef } from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { emptyCart } from "../../assets/images";
 import { useNavigate } from "react-router-dom";
-import RequireSignIn from "../RequireSignIn/RequireSignIn";
 
 const Cart = () => {
   const cartDetails = useSelector((state) => state.cartDetails);
+  const userDetails = useSelector((state) => state.signinDetails.userDetails);
   const cartProductsDetails = cartDetails.products;
   const navigate = useNavigate();
 
@@ -220,16 +220,19 @@ const Cart = () => {
               ${calculateTotalAmount() || "0.00"}
             </span>
           </h2>
-          <RequireSignIn>
-            <button
-              className="amazonButton font-normal"
-              onClick={() => {
-                navigate("/checkout");
-              }}
-            >
-              Proceed to Buy
-            </button>
-          </RequireSignIn>
+
+          <button
+            className="amazonButton font-normal"
+            onClick={() => {
+              navigate(userDetails?.name ? "/checkout" : "/signin", {
+                state: {
+                  originPath: location.pathname,
+                },
+              });
+            }}
+          >
+            Proceed to Buy
+          </button>
         </div>
       ) : (
         ""

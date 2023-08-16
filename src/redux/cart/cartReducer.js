@@ -25,6 +25,7 @@ const cartInitialState = {
 // };
 
 const cartReducer = (state = cartInitialState, action) => {
+  console.log("cartReducer", state);
   switch (action.type) {
     case "add_product":
       return {
@@ -34,6 +35,7 @@ const cartReducer = (state = cartInitialState, action) => {
         ],
         productsCount: state.productsCount + 1,
       };
+
     case "delete_product": {
       let quantityToBeSubtract;
       const filteredProducts = state.products.filter((item) => {
@@ -43,41 +45,16 @@ const cartReducer = (state = cartInitialState, action) => {
           return false;
         }
       });
-
-      console.log("deleted", filteredProducts, action.payload.id);
       return {
         products: filteredProducts,
         productsCount: state.productsCount - quantityToBeSubtract,
       };
     }
-    // case "increase_quantity": {
-    //   const productToUpdate = action.payload.id;
 
-    //   const updatedProducts = state.products.map((item) => {
-    //     if (productToUpdate === item.product.id) {
-    //       return {
-    //         product: { ...item.product },
-    //         quantity: Math.abs(item.quantity + action.payload.quantity),
-    //       };
-    //     }
-    //     return item;
-    //   });
-
-    //   console.log("quantity increased");
-
-    //   return {
-    //     products: updatedProducts,
-    //     productsCount: Math.abs(
-    //       (state.productsCount += action.payload.quantity)
-    //     ),
-    //   };
-    // }
     case "update_quantity": {
       const productIdToUpdate = action.payload.id;
-
       const updatedProducts = state.products.map((item) => {
         if (productIdToUpdate === item.product.id) {
-          console.log("itemquantity", item.quantity, action.payload.quantity);
           return {
             product: { ...item.product },
             quantity: Math.abs(item.quantity + action.payload.quantity),
@@ -85,9 +62,6 @@ const cartReducer = (state = cartInitialState, action) => {
         }
         return item;
       });
-
-      console.log("quantity updated");
-
       return {
         products: updatedProducts,
         productsCount: Math.abs(
@@ -95,6 +69,7 @@ const cartReducer = (state = cartInitialState, action) => {
         ),
       };
     }
+
     case "reset_cart": {
       return { products: [], productsCount: 0 };
     }

@@ -11,16 +11,44 @@ const PlaceOrder = ({ orderDetails }) => {
   const cartDetails = useSelector((state) => state.cartDetails);
   const userDetails = useSelector((state) => state.signinDetails.userDetails);
 
+  // const [isOrderSuccess, setOrderSuccess] = useState(true);
+
+  const [isValidOrderDetails, setValidOrderDetails] = useState(false);
+
   const [opened, { open, close }] = useDisclosure(false);
+
+  const [orderSummary, setOrderSummary] = useState({});
 
   const cartProductsDetails = cartDetails.products;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useMantineTheme();
 
-  const [isOrderSuccess, setOrderSuccess] = useState(true);
+  useEffect(() => {
+    const subtotal = parseFloat(
+      cartProductsDetails
+        .reduce(
+          (totalPrice, item) => totalPrice + item.product.price * item.quantity,
+          0
+        )
+        .toFixed(2)
+    );
 
-  const [isValidOrderDetails, setValidOrderDetails] = useState(false);
+    const shipping = parseFloat((cartDetails.productsCount * 40).toFixed(2));
+
+    const total = parseFloat((subtotal + shipping).toFixed(2));
+    const discount = shipping;
+    const grandtotal = parseFloat((total - discount).toFixed(2));
+
+    console.log(subtotal, shipping, total, discount, grandtotal);
+    setOrderSummary({
+      subtotal,
+      shipping,
+      total,
+      discount,
+      grandtotal,
+    });
+  }, [cartDetails, cartProductsDetails]);
 
   useEffect(() => {
     if (
@@ -34,27 +62,19 @@ const PlaceOrder = ({ orderDetails }) => {
     }
   }, [orderDetails, userDetails]);
 
-  const totalAmount = (() => {
-    const totalPrice = cartProductsDetails.reduce(
-      (totalPrice, item) => totalPrice + item.product.price * item.quantity,
-      0
-    );
-    return parseFloat(totalPrice.toFixed(2));
-  })();
-
   const handlePlaceOrderClick = (e) => {
     e.stopPropagation();
 
     const currentDate = new Date();
 
     const currentDay = currentDate.getDate(); // Gets the day of the month (1-31)
-    const currentMonth = currentDate.getMonth() + 1; // Gets the month (0-11), so adding 1 to make it 1-12
+    const currentMonth = currentDate.toLocaleString("en-US", { month: "long" }); // Gets the month (0-11), so adding 1 to make it 1-12
     const currentYear = currentDate.getFullYear(); // Gets the full year (e.g., 2023)
 
     const order = {
       ...orderDetails,
       ...cartDetails,
-      totalAmount,
+      orderSummary,
       date: { day: currentDay, month: currentMonth, year: currentYear },
     };
 
@@ -69,7 +89,7 @@ const PlaceOrder = ({ orderDetails }) => {
   };
   return (
     <div className="w-[300px] mx-auto p-5 bg-white border border-amazonBorder rounded-lg">
-      {isOrderSuccess && (
+      {
         <Modal
           opened={opened}
           onClose={close}
@@ -95,7 +115,7 @@ const PlaceOrder = ({ orderDetails }) => {
             Order Placed Successfully!
           </motion.div>
         </Modal>
-      )}
+      }
       <div className="border-b border-[#aaa] pb-1">
         <button
           disabled={!isValidOrderDetails}
@@ -116,25 +136,25 @@ const PlaceOrder = ({ orderDetails }) => {
         <div className="border-b border-[#aaa]">
           <div className="flex py-1 text-xs justify-between">
             <p>Items:</p>
-            <p>{totalAmount}</p>
+            <p>${orderSummary.subtotal}</p>
           </div>
           <div className="flex py-1 text-xs justify-between ">
             <p>Delivery:</p>
-            <p>$40</p>
+            <p>${orderSummary.shipping}</p>
           </div>
           <div className="flex py-1 text-xs justify-between ">
             <p>Total:</p>
-            <p>{totalAmount + 40}</p>
+            <p>${orderSummary.total}</p>
           </div>
           <div className="flex py-1 text-xs justify-between ">
             <p>Promotion Applied:</p>
-            <p>-$40</p>
+            <p>-${orderSummary.discount}</p>
           </div>
         </div>
       </div>
       <div className="flex py-2 border-b border-[#aaa] justify-between text-xl font-bold text-red-800">
         <h2>Order Total:</h2>
-        <h2>{totalAmount}</h2>
+        <h2>${orderSummary.grandtotal}</h2>
       </div>
     </div>
   );

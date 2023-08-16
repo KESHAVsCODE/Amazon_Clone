@@ -11,10 +11,12 @@ import useClickOutside from "../custom-hooks/useClickOutside";
 import ListOfAddresses from "../ListOfAddresses/ListOfAddresses";
 
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Group } from "@mantine/core";
+
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Header = () => {
   const userDetails = useSelector((state) => state.signinDetails.userDetails);
@@ -26,6 +28,8 @@ const Header = () => {
   const [opened, { open, close }] = useDisclosure(false);
 
   const [selectedAddress, setSelectedAddress] = useState({});
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setSelectedAddress(
@@ -173,7 +177,7 @@ const Header = () => {
         </NavLink>
 
         {/* ======================= Orders ======================= */}
-        <NavLink to="/orders">
+        <NavLink to="/youraccount/orders">
           <section name="orders" className="headerHover">
             <div>
               <p className=" text-xs leading-3">Returns</p>
@@ -200,6 +204,16 @@ const Header = () => {
             </span>
           </section>
         </NavLink>
+
+        {/* ======================= Sign Out ======================= */}
+        {userDetails?.name && (
+          <div
+            className="headerHover"
+            onClick={() => dispatch({ type: "reset_store" })}
+          >
+            <LogoutIcon style={{ fontSize: "28px" }} />
+          </div>
+        )}
       </div>
       <HeaderBottom />
     </>

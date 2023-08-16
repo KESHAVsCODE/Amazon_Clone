@@ -11,7 +11,7 @@ const AddAddress = () => {
   const location = useLocation();
 
   const [userAddress, setUserAddress] = useState({
-    country: "india",
+    country: "India",
     name: "",
     phone: "",
     pincode: "",

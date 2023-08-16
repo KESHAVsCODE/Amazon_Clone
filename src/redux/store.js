@@ -6,6 +6,14 @@ import { composeWithDevTools } from "redux-devtools-extension"; // Import compos
 import cartReducer from "./cart/cartReducer";
 import addressReducer from "./address/addressReducer";
 import orderReducer from "./order/orderReducer";
+
+const rootReducer = (state, action) => {
+  console.log("rootReducer", state);
+  if (action.type === "reset_store") {
+    return joinedReducer(undefined, action);
+  }
+  return joinedReducer(state, action);
+};
 const joinedReducer = combineReducers({
   signinDetails: signinReducer,
   cartDetails: cartReducer,
@@ -14,6 +22,6 @@ const joinedReducer = combineReducers({
 });
 
 export const store = createStore(
-  joinedReducer,
+  rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
