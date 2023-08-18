@@ -5,7 +5,7 @@ const Account = () => {
   return (
     <div className="w-full">
       <h1 className=" text-3xl py-4">Your Account</h1>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid md:grid-cols-2 mdl:grid-cols-3 gap-5">
         {yourAccountData.map((category) => {
           return (
             <div

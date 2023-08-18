@@ -6,7 +6,6 @@ const signinInitialState = {
 };
 
 const signinReducer = (state = signinInitialState, action) => {
-  console.log("signinReducer", state);
   switch (action.type) {
     case "signin-started":
       return { ...state, loggedIn: "Pending", loading: true, error: "" };

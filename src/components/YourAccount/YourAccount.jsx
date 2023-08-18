@@ -3,14 +3,11 @@ import { Outlet } from "react-router-dom";
 const YourAccount = () => {
   // const navigate = useNavigate();
   return (
-    <div className="w-full">
-      <div className="w-[1000px] mx-auto">
-        {/* <ul>
-          <li className="">Your Account</li>
-        </ul> */}
+    <section name="your-account" className="w-full">
+      <div className="p-6 mx-auto max-w-5xl">
         <Outlet />
       </div>
-    </div>
+    </section>
   );
 };
 

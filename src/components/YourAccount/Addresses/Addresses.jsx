@@ -49,7 +49,7 @@ const Addresses = () => {
   };
 
   return (
-    <div className="w-full">
+    <div name="your-addresses">
       {addressOperationSuccessMessage && (
         <motion.div
           initial={{ x: 100, opacity: 0 }}
@@ -63,7 +63,7 @@ const Addresses = () => {
       <h2 className="text-3xl font-medium  text-defaultHeading py-4">
         Your Addresses
       </h2>
-      <div className="w-full grid grid-cols-3 gap-4 auto-rows-[250px]">
+      <div className="grid md:grid-cols-2 mdl:grid-cols-3 gap-4 auto-rows-[250px]">
         <div
           name="add_new_address"
           ////////////////////////////////////////////////////////////////

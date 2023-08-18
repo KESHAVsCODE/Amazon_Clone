@@ -8,10 +8,9 @@ export default {
       },
       screens: {
         xs: "320px",
-        sm: "375px",
-        sml: "500px",
+        sm: "480px",
         md: "667px",
-        mdl: "768px",
+        mdl: "845px",
         lg: "960px",
         lgl: "1024px",
         xl: "1280px",

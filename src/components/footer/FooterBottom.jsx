@@ -2,9 +2,9 @@ import footerCategoryData from "../../constants/footerCategoryData";
 
 const FooterBottom = () => {
   return (
-    <div className="w-full bg-footerBottom py-8">
+    <section name="footer-bottom" className="bg-footerBottom py-8">
       <div className="max-w-5xl mx-auto">
-        <div className="w-full grid grid-cols-5 gap-4 place-content-center text-gray-400">
+        <div className="px-8 grid grid-cols-2 md:grid-cols-3  lg:grid-cols-5 gap-8 place-content-center text-gray-400">
           {footerCategoryData.map((category) => {
             return (
               <div
@@ -35,7 +35,7 @@ const FooterBottom = () => {
           </h3>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

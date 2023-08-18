@@ -6,9 +6,9 @@ const FooterTop = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full bg-white pt-5">
+    <section name="footer-top" className="bg-white pt-5">
       {!userDetails?.name && (
-        <div className="w-full border-[1px] border-[#ddd] py-6 px-5 ">
+        <div className="border-y-[1px] border-[#ddd] py-6 px-5 ">
           <div className="w-[230px] mx-auto text-center pt-2">
             <p className="text-[13px] leading-6 font-medium">
               See Personalized recommendations
@@ -40,7 +40,7 @@ const FooterTop = () => {
           Back to top
         </a>
       </div>
-    </div>
+    </section>
   );
 };
 

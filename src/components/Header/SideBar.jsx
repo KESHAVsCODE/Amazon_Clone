@@ -19,7 +19,7 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
         initial={{ x: "-100%", opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className={`w-[365px] h-full bg-white border border-black`}
+        className="w-[80%] md:w-[365px] h-full bg-white border border-black"
       >
         <section className=" bg-amazon_light text-white h-[50px] flex items-center relative cursor-pointer hover:opacity-90">
           <div

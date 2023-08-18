@@ -3,6 +3,7 @@ import { useContext, useRef, useState, useEffect } from "react";
 import Products from "../Products";
 import RatingStars from "../Products/RatingStars";
 import ProductDataContext from "../../context/ProductDataContextProvider";
+import { useSearchParams } from "react-router-dom";
 
 const productCategories = [
   "men's clothing",
@@ -23,6 +24,9 @@ const FilteredProducts = () => {
 
   const categoryInputRef = useRef([]);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  console.log(searchParams.get("category"));
   const handleApplyCategoryFilterClick = () => {
     const filteredElement = categoryInputRef.current.filter(
       (element) => element?.checked
@@ -31,7 +35,6 @@ const FilteredProducts = () => {
     const selectedProductCategory = filteredElement.map(
       (element) => element?.id
     );
-
     setSelectedProductCategory(selectedProductCategory);
   };
 
@@ -41,6 +44,9 @@ const FilteredProducts = () => {
         selectedProductCategory?.includes(product.category)
       );
     }
+
+    console.log("products", products);
+    console.log("selectedProductCategory", selectedProductCategory);
 
     if (filterByRating > 0) {
       products = products.filter((product) => {
@@ -82,15 +88,19 @@ const FilteredProducts = () => {
   };
 
   useEffect(() => {
-    // Apply filtering and sorting
-    const filteredData = applyFilters([...listOfProducts]);
+    setSearchParams({ category: selectedProductCategory });
+  }, [selectedProductCategory, setSearchParams]);
 
-    const sortedAndFilteredData = applySorting(filteredData);
+  // useEffect(() => {
+  //   // Apply filtering and sorting
+  //   const filteredData = applyFilters([...listOfProducts]);
 
-    // Update state
-    setFilteredProductsData(sortedAndFilteredData);
-    setProductCount(sortedAndFilteredData?.length);
-  }, [selectedProductCategory, filterByRating, sortProductsBy, listOfProducts]);
+  //   const sortedAndFilteredData = applySorting(filteredData);
+
+  //   // Update state
+  //   setFilteredProductsData(sortedAndFilteredData);
+  //   setProductCount(sortedAndFilteredData?.length);
+  // }, [selectedProductCategory, filterByRating, sortProductsBy, listOfProducts]);
 
   return (
     <div className="">

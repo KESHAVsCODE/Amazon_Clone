@@ -3,7 +3,6 @@ const initialOrdersState = {
 };
 
 const orderReducer = (state = initialOrdersState, action) => {
-  console.log("orderReducer", state);
   switch (action.type) {
     case "place_order":
       return { orders: [action.payload, ...state.orders] };

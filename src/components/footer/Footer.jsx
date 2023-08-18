@@ -3,11 +3,11 @@ import FooterMiddle from "./FooterMiddle";
 import FooterBottom from "./FooterBottom";
 const Footer = () => {
   return (
-    <div>
+    <footer>
       <FooterTop />
       <FooterMiddle />
       <FooterBottom />
-    </div>
+    </footer>
   );
 };
 

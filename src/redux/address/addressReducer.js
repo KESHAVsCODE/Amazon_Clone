@@ -4,7 +4,6 @@ const userInitialAddress = {
 };
 
 const addressReducer = (state = userInitialAddress, action) => {
-  console.log("addressReducer", state);
   switch (action.type) {
     case "add_address":
       return {

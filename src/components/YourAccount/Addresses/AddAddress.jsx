@@ -132,7 +132,7 @@ const AddAddress = () => {
   return (
     <div
       name="add-new-address"
-      className="w-full p-5 mt-5  text-defaultParagraph flex flex-col items-center"
+      className="w-full text-defaultParagraph flex flex-col items-center"
     >
       {isAddressAdded && (
         <motion.div
@@ -144,7 +144,7 @@ const AddAddress = () => {
           Address saved!
         </motion.div>
       )}
-      <div className="w-[500px]">
+      <div className="">
         <h2 className="text-2xl font-bold text-defaultHeading py-4">
           Add a new address
         </h2>
@@ -260,7 +260,7 @@ const AddAddress = () => {
           </div>
 
           <div className="flex gap-2">
-            <div>
+            <div className="flex-1">
               <label htmlFor="city">Town/City</label>
               <input id="city" type="text" value={city} className="inputBox" />
               {userAddressError.cityError && (

@@ -23,7 +23,7 @@ import PageNotFound from "./PageNotFound";
 
 const CustomLayout = () => {
   return (
-    <div>
+    <div name="custom-layout">
       <Header />
       <Outlet />
       <Footer />
@@ -33,7 +33,7 @@ const CustomLayout = () => {
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="">
+      <div name="app">
         <Routes>
           <Route path="/" element={<CustomLayout />}>
             <Route index element={<Home />} />
