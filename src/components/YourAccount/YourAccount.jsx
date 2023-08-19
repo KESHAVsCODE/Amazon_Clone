@@ -3,11 +3,11 @@ import { Outlet } from "react-router-dom";
 const YourAccount = () => {
   // const navigate = useNavigate();
   return (
-    <section name="your-account" className="w-full">
-      <div className="p-6 mx-auto max-w-5xl">
+    <main name="your-account" className="w-full">
+      <section className="p-6 mx-auto max-w-5xl">
         <Outlet />
-      </div>
-    </section>
+      </section>
+    </main>
   );
 };
 

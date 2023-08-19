@@ -3,7 +3,6 @@ import { useContext, useRef, useState, useEffect } from "react";
 import Products from "../Products";
 import RatingStars from "../Products/RatingStars";
 import ProductDataContext from "../../context/ProductDataContextProvider";
-import { useSearchParams } from "react-router-dom";
 
 const productCategories = [
   "men's clothing",
@@ -12,7 +11,6 @@ const productCategories = [
   "electronics",
 ];
 const FilteredProducts = () => {
-  // const location = useLocation();
   const { listOfProducts } = useContext(ProductDataContext);
   const [productCount, setProductCount] = useState(0);
 
@@ -24,9 +22,6 @@ const FilteredProducts = () => {
 
   const categoryInputRef = useRef([]);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  console.log(searchParams.get("category"));
   const handleApplyCategoryFilterClick = () => {
     const filteredElement = categoryInputRef.current.filter(
       (element) => element?.checked
@@ -44,9 +39,6 @@ const FilteredProducts = () => {
         selectedProductCategory?.includes(product.category)
       );
     }
-
-    console.log("products", products);
-    console.log("selectedProductCategory", selectedProductCategory);
 
     if (filterByRating > 0) {
       products = products.filter((product) => {
@@ -88,22 +80,18 @@ const FilteredProducts = () => {
   };
 
   useEffect(() => {
-    setSearchParams({ category: selectedProductCategory });
-  }, [selectedProductCategory, setSearchParams]);
+    // Apply filtering and sorting
+    const filteredData = applyFilters([...listOfProducts]);
 
-  // useEffect(() => {
-  //   // Apply filtering and sorting
-  //   const filteredData = applyFilters([...listOfProducts]);
+    const sortedAndFilteredData = applySorting(filteredData);
 
-  //   const sortedAndFilteredData = applySorting(filteredData);
-
-  //   // Update state
-  //   setFilteredProductsData(sortedAndFilteredData);
-  //   setProductCount(sortedAndFilteredData?.length);
-  // }, [selectedProductCategory, filterByRating, sortProductsBy, listOfProducts]);
+    // Update state
+    setFilteredProductsData(sortedAndFilteredData);
+    setProductCount(sortedAndFilteredData?.length);
+  }, [selectedProductCategory, filterByRating, sortProductsBy, listOfProducts]);
 
   return (
-    <div className="">
+    <section name="filter-products" className="">
       {/*===================================== sort product section ===================================== */}
       <section
         name="sort"
@@ -222,7 +210,7 @@ const FilteredProducts = () => {
           <Products filteredProductsData={filteredProductsData} />
         </div>
       </section>
-    </div>
+    </section>
   );
 };
 

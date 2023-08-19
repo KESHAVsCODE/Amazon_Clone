@@ -37,73 +37,76 @@ const Orders = () => {
 
   console.log(orderDetails);
   return (
-    <div className="w-[1000px] mx-auto text-defaultHeading">
+    <section name="orders" className="max-w-5xl mx-auto text-defaultHeading">
       <h2 className="text-3xl my-3 border-b border-[#bbb]">Your Orders</h2>
-      <div className="mx-5">
-        <div className="">
+      <div>
+        <section>
           <span className=" font-medium">
             {orderDetails.orders.length} Orders{" "}
           </span>
           <span>placed</span>
-        </div>
+        </section>
 
-        <div>
+        <section>
           <ul className="my-2 grid gap-4">
             {orderDetails.orders.map((order, index) => {
               return (
                 <li
                   key={index}
-                  className=" border border-amazonBorder rounded-lg overflow-hidden]"
+                  className="border border-amazonBorder rounded-lg overflow-hidden]"
                 >
-                  <div className="p-4 flex gap-4 items-center justify-between border-b border-amazonBorder bg-quantity_box">
+                  {/* order details */}
+
+                  <div
+                    name="order-details"
+                    className="p-4 grid gap-4  grid-cols-2 mdl:grid-cols-4 items-center border-b border-amazonBorder bg-quantity_box"
+                  >
                     {/* left */}
-                    <div className="flex gap-8 items-center">
-                      <div>
-                        <p className="text-lightGray text-xs">ORDER PLACED</p>
-                        <p className="text-sm text-littleDarkGray font-medium">
-                          {order.date.day} {"November"} {order.date.year}
+
+                    <div>
+                      <p className="text-lightGray text-xs">ORDER PLACED</p>
+                      <p className="text-sm text-littleDarkGray font-medium">
+                        {order.date.day} {"November"} {order.date.year}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-lightGray text-xs">TOTAL</p>
+                      <p className="text-sm text-littleDarkGray font-medium">
+                        ${order.orderSummary.grandtotal}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-lightGray text-xs">SHIP TO</p>
+                      <div className="w-max group relative">
+                        <p className="navigateButtonLinks text-sm relative">
+                          {order.deliveryAddress.address.name}
                         </p>
-                      </div>
 
-                      <div>
-                        <p className="text-lightGray text-xs">TOTAL</p>
-                        <p className="text-sm text-littleDarkGray font-medium">
-                          ${order.orderSummary.grandtotal}
-                        </p>
-                      </div>
-
-                      <div>
-                        <p className="text-lightGray text-xs">SHIP TO</p>
-                        <div className="group relative">
-                          <p className="navigateButtonLinks text-sm">
-                            {order.deliveryAddress.address.name}
-                          </p>
-
-                          <div
-                            className="w-max text-sm absolute hidden px-4 py-3 border border-[#ccc] rounded-lg bg-white shadow-xl
+                        <div
+                          className="w-max text-sm absolute hidden px-4 py-3 border border-[#ccc] rounded-lg bg-white shadow-xl
                                       opacity-0 group-hover:opacity-100 group-hover:block transition-opacity
-                                      left-[50%] transform -translate-x-1/2  translate-y-2"
-                          >
-                            <h4 className="font-medium">
-                              {order.deliveryAddress.address.name}
-                            </h4>
-                            <p>{order.deliveryAddress.address.houseNumber}</p>
-                            <p>
-                              {order.deliveryAddress.address.area}{" "}
-                              {order.deliveryAddress.address.landmark &&
-                                `(${order.deliveryAddress.address.landmark})`}
-                            </p>
-                            <p>
-                              {order.deliveryAddress.address.city},{" "}
-                              {order.deliveryAddress.address.state}{" "}
-                            </p>
-                            <p>{order.deliveryAddress.address.pincode}</p>
-                            <p>{order.deliveryAddress.address.country}</p>
-                            <p>
-                              Phone number:{" "}
-                              {order.deliveryAddress.address.phone}
-                            </p>
-                          </div>
+                                      mdl:left-[50%] transform mdl:-translate-x-1/2  mdl:translate-y-2"
+                        >
+                          <h4 className="font-medium">
+                            {order.deliveryAddress.address.name}
+                          </h4>
+                          <p>{order.deliveryAddress.address.houseNumber}</p>
+                          <p>
+                            {order.deliveryAddress.address.area}{" "}
+                            {order.deliveryAddress.address.landmark &&
+                              `(${order.deliveryAddress.address.landmark})`}
+                          </p>
+                          <p>
+                            {order.deliveryAddress.address.city},{" "}
+                            {order.deliveryAddress.address.state}{" "}
+                          </p>
+                          <p>{order.deliveryAddress.address.pincode}</p>
+                          <p>{order.deliveryAddress.address.country}</p>
+                          <p>
+                            Phone number: {order.deliveryAddress.address.phone}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -112,7 +115,7 @@ const Orders = () => {
 
                     <div>
                       <p className="text-lightGray text-xs">
-                        ORDER # 405-2153507-88251{index}
+                        ORDER # 2153-882{index}
                       </p>
                       <div className="w-max group relative">
                         <p className="navigateButtonLinks text-sm relative">
@@ -122,7 +125,7 @@ const Orders = () => {
                         <div
                           className=" w-max text-sm absolute hidden px-4 py-3 border border-[#ccc] rounded-lg bg-white shadow-xl
                                       opacity-0 group-hover:opacity-100 group-hover:block transition-opacity
-                                      left-[50%] transform -translate-x-1/2  translate-y-2"
+                                      right-0 mdl:left-[50%] transform mdl:-translate-x-1/2  mdl:translate-y-2"
                         >
                           <div className="pb-2">
                             <h4 className="font-medium">Payment Method</h4>
@@ -157,7 +160,9 @@ const Orders = () => {
                     </div>
                   </div>
 
-                  <div>
+                  {/* products details */}
+
+                  <div name="product-details">
                     <ul>
                       {order.products.map((item, index) => {
                         console.log("item.product.id", item.product.id);
@@ -165,14 +170,14 @@ const Orders = () => {
                           <li key={index} className="flex px-4 py-5 gap-6">
                             <div>
                               <img
-                                className="w-20"
+                                className=" min-w-[100px] max-w-[100px] max-h-[120px]"
                                 src={item.product.image}
                                 alt="product-image"
                               />
                             </div>
-                            <div>
-                              <p className="text-sm w-[500px]">
-                                {item.product.description}
+                            <div className="max-w-[350px]">
+                              <p className="text-sm ">
+                                {item.product.description.slice(0, 100)} . . .
                               </p>
                               <button
                                 data-id={item.product.id}
@@ -182,8 +187,8 @@ const Orders = () => {
                                 <CachedIcon style={{ fontSize: "20px" }} />
                                 <p>Buy it again</p>
                               </button>
-                              <p className="text-sm">
-                                Total Quantity Purchased: {item.quantity}
+                              <p className="text-sm text-littleDarkGray">
+                                Quantity Purchased: {item.quantity}
                               </p>
                             </div>
                           </li>
@@ -195,9 +200,9 @@ const Orders = () => {
               );
             })}
           </ul>
-        </div>
+        </section>
       </div>
-    </div>
+    </section>
   );
 };
 

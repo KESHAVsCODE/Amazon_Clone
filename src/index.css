@@ -35,7 +35,7 @@
     @apply text-base font-bold italic text-error;
   }
   .cartButtonLinks {
-    @apply text-link text-xs font-normal tracking-wide cursor-pointer hover:underline duration-150 border-l px-4 border-lightText;
+    @apply text-link text-xs font-normal tracking-wide cursor-pointer hover:underline duration-150 border-lightText;
   }
   .navigateButtonLinks {
     @apply text-link text-xs font-normal tracking-wide cursor-pointer hover:underline duration-150 border-lightText hover:text-orange-600 outline-none;

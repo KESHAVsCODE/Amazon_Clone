@@ -89,23 +89,33 @@ const Cart = () => {
   };
 
   return (
-    <section name="shopping-cart" className="flex gap-5 bg-[#eaeded] py-8 px-6">
-      <div className="w-[78%] bg-white py-6 px-4">
+    <section
+      name="shopping-cart"
+      className="flex flex-col justify-between lg:flex-row  gap-5 bg-[#eaeded] py-8 px-6"
+    >
+      <div className="flex-1 bg-white py-6 px-4">
         <h1 className="text-3xl font-medium text-amazon_blue border-b pb-4">
           {cartProductsDetails.length
             ? "Shopping Cart"
             : "Your Amazon Cart is empty."}
         </h1>
-        <div className="w-[90%]">
+        <div className="">
           {!cartProductsDetails.length ? (
             <img className="mx-auto" src={emptyCart} alt="empty-cart-image" />
           ) : (
             <ul>
               {cartProductsDetails.map((item, index) => {
                 return (
-                  <li key={item.product.id} className="flex border-b my-4">
-                    <div className="w-[180px] px-6 py-6">
-                      <img src={item.product.image} alt="item.product-image" />
+                  <li
+                    key={item.product.id}
+                    className="flex flex-col gap-6 md:flex-row border-b py-4"
+                  >
+                    <div className="mx-auto md:mx-0  ">
+                      <img
+                        className="min-w-[150px] max-w-[150px] max-h-[200px]"
+                        src={item.product.image}
+                        alt="item.product-image"
+                      />
                     </div>
                     <div>
                       <h3 className="text-lg font-medium">
@@ -114,7 +124,7 @@ const Cart = () => {
                       <h2 className="text-lg font-bold">
                         ${item.product.price}
                       </h2>
-                      <div className="flex flex-col gap-1">
+                      <div className="grid  gap-1">
                         <p className="text-xs font-medium text-[#007600]">
                           In stock
                         </p>
@@ -137,8 +147,8 @@ const Cart = () => {
                           </span>
                         </p>
                       </div>
-                      <div className="flex items-center py-2">
-                        <div className="mr-3">
+                      <div className="flex flex-wrap gap-4 items-center py-2">
+                        <div className="flex items-center gap-1">
                           <input
                             type="number"
                             placeholder="Qty:"
@@ -159,7 +169,7 @@ const Cart = () => {
                           <button
                             id={item.product.id}
                             onClick={handleUpdateQuantityClick}
-                            className="amazonButton text-[11px] p-[2px] ml-1 text-amazon_blue w-14"
+                            className="amazonButton w-max h-max text-[10px] px-2 py-[2px] transform scale-90 text-amazon_blue"
                           >
                             Update
                           </button>
@@ -171,7 +181,6 @@ const Cart = () => {
                         >
                           Delete
                         </p>
-                        <p className="cartButtonLinks">Save for later</p>
                         <p className="cartButtonLinks">Add to wishlist</p>
                         <p className="cartButtonLinks">See more like this</p>
                       </div>
@@ -191,7 +200,7 @@ const Cart = () => {
         </h2>
       </div>
       {cartProductsDetails.length ? (
-        <div className="w-[23%]  h-[220px] p-5 bg-white">
+        <div className="mx-auto w-max h-max p-5 bg-white">
           <div className="flex text-xs">
             <span className="text-[#067d62]">
               <CheckCircleIcon style={{ fontSize: "22px" }} />
@@ -200,13 +209,13 @@ const Cart = () => {
               <p className="text-[#067d62]">
                 Your order is eligible for FREE Delivery.
               </p>
-              <div className="flex text-xs text-defaultParagraph">
-                <p>Select this option at checkout. </p>
+              <div className=" text-xs text-defaultParagraph">
+                <span>Select this option at checkout. </span>
                 <a
                   href="https://www.amazon.in/gp/help/customer/display.html?nodeId=200904360&pop-up=1"
                   target="_blank"
                   rel="noreferrer"
-                  className="pl-1 cartButtonLinks hover:text-orange-700  px-0 border-l-0"
+                  className="inline cartButtonLinks hover:text-orange-700  px-0 border-l-0"
                 >
                   Details
                 </a>
@@ -222,7 +231,7 @@ const Cart = () => {
           </h2>
 
           <button
-            className="amazonButton font-normal"
+            className="amazonButton font-normal max-w-xs"
             onClick={() => {
               navigate(userDetails?.name ? "/checkout" : "/signin", {
                 state: {

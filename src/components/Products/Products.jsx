@@ -74,7 +74,7 @@ const Product = ({ filteredProductsData = [] }) => {
   return (
     <section
       name="products"
-      className="max-w-screen-2xl mx-auto  grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10 xl:gap-4 px-4"
+      className="max-w-screen-2xl mx-auto  grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-4 px-4"
     >
       {productsData.map((item) => (
         <div

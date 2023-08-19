@@ -77,7 +77,7 @@ const PaymentMethod = ({ setOrderDetails, handleOpenItem, orderDetails }) => {
                   )}
                 </div>
 
-                <div>
+                <div className="overflow-x-scroll">
                   <ListOfCards />
                 </div>
               </div>

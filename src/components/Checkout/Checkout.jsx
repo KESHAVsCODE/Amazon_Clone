@@ -22,8 +22,8 @@ const Checkout = () => {
   };
 
   return (
-    <div className="p-4 font-500">
-      <div className="flex justify-around  bg-zinc-100 bg-gradient-to-b from-white via-white to-zinc-100 border-b border-selectBorder">
+    <section name="checkout" className="p-4 font-500">
+      <header className="flex justify-around  bg-zinc-100 bg-gradient-to-b from-white via-white to-zinc-100 border-b border-selectBorder">
         <div className="cursor-pointer" onClick={() => navigate("/")}>
           <img src={logoDark} alt="website-logo" className="w-32" />
         </div>
@@ -31,104 +31,106 @@ const Checkout = () => {
         <div className="pt-1">
           <LockIcon style={{ color: "#888" }} />
         </div>
-      </div>
-      <section className="w-[800px] mx-auto">
-        <div>
-          <Accordion
-            defaultValue="delivery-address"
-            value={openedItem}
-            onChange={setOpenedItem}
+      </header>
+      <main className="max-w-5xl mx-auto">
+        <Accordion
+          defaultValue="delivery-address"
+          value={openedItem}
+          onChange={setOpenedItem}
+        >
+          <Accordion.Item value="delivery-address">
+            <Accordion.Control>
+              {openedItem === "delivery-address" ? (
+                <div className="flex gap-3 items-start text-base leading-5 md:text-xl font-medium text-orange-700">
+                  <h2>1</h2>
+                  <h2>Select delivery address</h2>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2">
+                  <div className="flex gap-3 items-start text-base leading-5 md:text-xl font-medium text-defaultHeading">
+                    <h2>1</h2>
+                    <h2>Delivery address</h2>
+                  </div>
+                  {orderDetails.deliveryAddress?.address && (
+                    <div className="text-sm md:text-base">
+                      <p>{orderDetails.deliveryAddress.address.name}</p>
+                      <p>{orderDetails.deliveryAddress.address.houseNumber}</p>
+                      <p>{orderDetails.deliveryAddress.address.area}</p>
+                      <p>
+                        {`${orderDetails.deliveryAddress.address.city}, ${orderDetails.deliveryAddress.address.state}, ${orderDetails.deliveryAddress.address.pincode}`}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </Accordion.Control>
+
+            <Accordion.Panel>
+              <SelectAddress
+                setOrderDetails={setOrderDetails}
+                handleOpenItem={handleOpenItem}
+                orderDetails={orderDetails}
+              />
+            </Accordion.Panel>
+          </Accordion.Item>
+
+          <Accordion.Item
+            value="payment-methods"
+            opened={openedItem === "payment-methods"}
           >
-            <Accordion.Item value="delivery-address">
-              <Accordion.Control>
-                {openedItem === "delivery-address" ? (
-                  <h2 className=" font-medium text-xl text-orange-700">
-                    <span className="pr-3">1</span> Select delivery address
-                  </h2>
-                ) : (
-                  <div className="grid grid-cols-2">
-                    <h2 className=" font-medium text-xl text-defaultHeading">
-                      <span className="pr-3">1</span> Delivery address
-                    </h2>
-                    {orderDetails.deliveryAddress?.address && (
-                      <div>
-                        <p>{orderDetails.deliveryAddress.address.name}</p>
-                        <p>
-                          {orderDetails.deliveryAddress.address.houseNumber}
-                        </p>
-                        <p>{orderDetails.deliveryAddress.address.area}</p>
-                        <p>
-                          {`${orderDetails.deliveryAddress.address.city}, ${orderDetails.deliveryAddress.address.state}, ${orderDetails.deliveryAddress.address.pincode}`}
-                        </p>
-                      </div>
-                    )}
+            <Accordion.Control>
+              {openedItem === "payment-methods" ? (
+                <div className="flex gap-3 items-start text-base leading-5 md:text-xl font-medium text-orange-700">
+                  <h2>2</h2>
+                  <h2>Select a payment method</h2>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 items-center">
+                  <div className="flex gap-3 items-start text-base leading-5 md:text-xl font-medium text-defaultHeading">
+                    <h2>2</h2>
+                    <h2>Payment method</h2>
                   </div>
-                )}
-              </Accordion.Control>
+                  {orderDetails.paymentDetails && (
+                    <div className="text-sm md:text-base">
+                      <p>{orderDetails.paymentDetails.method}</p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </Accordion.Control>
+            <Accordion.Panel>
+              <PaymentMethod
+                setOrderDetails={setOrderDetails}
+                handleOpenItem={handleOpenItem}
+                orderDetails={orderDetails}
+              />
+            </Accordion.Panel>
+          </Accordion.Item>
 
-              <Accordion.Panel>
-                <SelectAddress
-                  setOrderDetails={setOrderDetails}
-                  handleOpenItem={handleOpenItem}
-                  orderDetails={orderDetails}
-                />
-              </Accordion.Panel>
-            </Accordion.Item>
-
-            <Accordion.Item
-              value="payment-methods"
-              opened={openedItem === "payment-methods"}
-            >
-              <Accordion.Control>
-                {openedItem === "payment-methods" ? (
-                  <h2 className=" font-medium text-xl text-orange-700">
-                    <span className="pr-3">2</span> Select a payment method
-                  </h2>
-                ) : (
-                  <div className="grid grid-cols-2">
-                    <h2 className=" font-medium text-xl text-defaultHeading">
-                      <span className="pr-3">2</span> Payment Method
-                    </h2>
-                    {orderDetails.paymentDetails && (
-                      <div>
-                        <p>{orderDetails.paymentDetails.method}</p>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </Accordion.Control>
-              <Accordion.Panel>
-                <PaymentMethod
-                  setOrderDetails={setOrderDetails}
-                  handleOpenItem={handleOpenItem}
-                  orderDetails={orderDetails}
-                />
-              </Accordion.Panel>
-            </Accordion.Item>
-
-            <Accordion.Item
-              value="place-order"
-              opened={openedItem === "place-order"}
-            >
-              <Accordion.Control>
-                {openedItem === "place-order" ? (
-                  <h2 className=" font-medium text-xl text-orange-700">
-                    <span className="pr-3">3</span> Place your order
-                  </h2>
-                ) : (
-                  <h2 className=" font-medium text-xl">
-                    <span className="pr-3">3</span>Your order
-                  </h2>
-                )}
-              </Accordion.Control>
-              <Accordion.Panel>
-                <PlaceOrder orderDetails={orderDetails} />
-              </Accordion.Panel>
-            </Accordion.Item>
-          </Accordion>
-        </div>
-      </section>
-    </div>
+          <Accordion.Item
+            value="place-order"
+            opened={openedItem === "place-order"}
+          >
+            <Accordion.Control>
+              {openedItem === "place-order" ? (
+                <div className="flex gap-3 items-start text-base leading-5 md:text-xl font-medium text-orange-700">
+                  <h2>3</h2>
+                  <h2>Place your order</h2>
+                </div>
+              ) : (
+                <div className="flex gap-3 items-start text-base leading-5 md:text-xl font-medium text-defaultHeading">
+                  <h2>2</h2>
+                  <h2>Your order</h2>
+                </div>
+              )}
+            </Accordion.Control>
+            <Accordion.Panel>
+              <PlaceOrder orderDetails={orderDetails} />
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>
+      </main>
+    </section>
   );
 };
 export default Checkout;
