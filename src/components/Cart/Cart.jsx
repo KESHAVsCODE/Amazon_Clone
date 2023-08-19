@@ -181,8 +181,24 @@ const Cart = () => {
                         >
                           Delete
                         </p>
-                        <p className="cartButtonLinks">Add to wishlist</p>
-                        <p className="cartButtonLinks">See more like this</p>
+                        <p
+                          className="cartButtonLinks"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate("/youraccount/wishlist");
+                          }}
+                        >
+                          Add to wishlist
+                        </p>
+                        <p
+                          className="cartButtonLinks"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate("/filtered_products");
+                          }}
+                        >
+                          See more like this
+                        </p>
                       </div>
                     </div>
                   </li>
