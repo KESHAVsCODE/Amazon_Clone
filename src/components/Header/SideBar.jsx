@@ -11,7 +11,8 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
-    <div
+    <section
+      name="sidebar"
       className={`w-full h-screen fixed top-0 left-0 bg-amazon_blue bg-opacity-90 z-[9999]`}
     >
       <motion.div
@@ -271,7 +272,7 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
           </ul>
         </section>
       </motion.div>
-    </div>
+    </section>
   );
 };
 

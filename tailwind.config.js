@@ -54,6 +54,7 @@ export default {
         itemSelect: "0 2px 5px 0 rgba(210,210,210)",
         inputBoxShadow: "inset 0 1px 2px rgba(15,17,17,.15) ",
         activeAmazonButtonShadow: "0 0 0 3px #c8f3fa, inset 0 0 0 2px #fff",
+        inlineButtonShadow: "inset 0 0 0 2px #FFF, inset 0 0 0 4px #008296",
         imageShadow: "2px 3px 5px rgba(230, 230, 230, 0.7)",
         borderBottomShadow: "0 3px 5px 0px #ccc",
       },

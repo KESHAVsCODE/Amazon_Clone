@@ -49,7 +49,7 @@ const Checkout = () => {
                 <div className="grid grid-cols-2">
                   <div className="flex gap-3 items-start text-base leading-5 md:text-xl font-medium text-defaultHeading">
                     <h2>1</h2>
-                    <h2>Delivery address</h2>
+                    <h2 className="pr-4">Delivery address</h2>
                   </div>
                   {orderDetails.deliveryAddress?.address && (
                     <div className="text-sm md:text-base">
@@ -88,7 +88,7 @@ const Checkout = () => {
                 <div className="grid grid-cols-2 items-center">
                   <div className="flex gap-3 items-start text-base leading-5 md:text-xl font-medium text-defaultHeading">
                     <h2>2</h2>
-                    <h2>Payment method</h2>
+                    <h2 className="pr-4">Payment method</h2>
                   </div>
                   {orderDetails.paymentDetails && (
                     <div className="text-sm md:text-base">

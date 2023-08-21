@@ -2,7 +2,7 @@ import { logoDark } from "../../assets/images";
 import { NavLink } from "react-router-dom";
 const PageNotFound = () => {
   return (
-    <div className="grid place-content-center">
+    <div className="px-4 grid place-content-center">
       <div className="mx-auto">
         <NavLink to="/">
           <img className="w-32 py-2" src={logoDark} alt="website-logo" />
