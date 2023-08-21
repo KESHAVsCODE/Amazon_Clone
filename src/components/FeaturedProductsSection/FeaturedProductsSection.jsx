@@ -55,20 +55,19 @@ const FeaturedProductsSection = () => {
     <>
       <section name="hero-featured">
         <div className="h-max relative">
-          <div name="slider_container" className="flex overflow-hidden">
-            <div name="slider" className="flex">
-              {featuredProductsImages.map((image, index) => {
-                return (
-                  <img
-                    key={`bannerImg${index + 1}`}
-                    src={image}
-                    className={`transform translate-x-[${
-                      slideImagePosition * 100
-                    }%] transition-transform duration-300`}
-                    alt="featured-product-image"
-                  />
-                );
-              })}
+          <div name="slider-container" className="overflow-hidden">
+            <div
+              name="slider"
+              className="flex transition-transform duration-500"
+              style={{
+                transform: `translateX(${slideImagePosition * 100}%)`,
+              }}
+            >
+              {featuredProductsImages.map((image, index) => (
+                <div name="slides" key={index} className="min-w-[100%]">
+                  <img src={image} alt="featured-product-image" />
+                </div>
+              ))}
             </div>
           </div>
 
@@ -95,6 +94,7 @@ const FeaturedProductsSection = () => {
             </button>
           </div>
         </div>
+
         <div className="relative -mt-[50px] md:-mt-[200px]  lgl:-mt-[270px] z-[99]">
           <section className="grid md:grid-cols-2  lg:grid-cols-4 px-4 gap-4 z-50 pb-4">
             <div
