@@ -3,6 +3,7 @@ import { useContext, useRef, useState, useEffect } from "react";
 import Products from "../Products";
 import RatingStars from "../Products/RatingStars";
 import ProductDataContext from "../../context/ProductDataContextProvider";
+// import { useSearchParams } from "react-router-dom";
 
 const productCategories = [
   "men's clothing",
@@ -19,6 +20,7 @@ const FilteredProducts = () => {
   const [filterByRating, setFilterByRating] = useState(0);
 
   const [filteredProductsData, setFilteredProductsData] = useState([]);
+  // const [searchParams, setSearchParams] = useSearchParams();
 
   const categoryInputRef = useRef([]);
 
@@ -89,6 +91,22 @@ const FilteredProducts = () => {
     setFilteredProductsData(sortedAndFilteredData);
     setProductCount(sortedAndFilteredData?.length);
   }, [selectedProductCategory, filterByRating, sortProductsBy, listOfProducts]);
+
+  // useEffect(() => {
+  //   const searchParams = {};
+  //   if (selectedProductCategory.length)
+  //     searchParams.category = selectedProductCategory;
+  //   if (filterByRating > 0) searchParams.rating = filterByRating;
+  //   if (sortProductsBy) searchParams.sort = sortProductsBy;
+  //   if (Object.keys(searchParams).length > 0) {
+  //     setSearchParams(searchParams);
+  //   }
+  // }, [
+  //   selectedProductCategory,
+  //   filterByRating,
+  //   sortProductsBy,
+  //   setSearchParams,
+  // ]);
 
   return (
     <section name="filter-products" className="">

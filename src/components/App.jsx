@@ -17,6 +17,7 @@ import Checkout from "./Checkout";
 import FilteredProducts from "./FilteredProducts";
 
 import RequireSignIn from "./RequireSignIn/RequireSignIn";
+import ScrollToTop from "./custom-hooks/scrollToTop";
 
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import PageNotFound from "./PageNotFound";
@@ -25,6 +26,7 @@ const CustomLayout = () => {
   return (
     <div name="custom-layout">
       <Header />
+      <ScrollToTop />
       <Outlet />
       <Footer />
     </div>
