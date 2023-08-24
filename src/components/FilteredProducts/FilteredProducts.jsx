@@ -20,7 +20,6 @@ const FilteredProducts = () => {
   const [filterByRating, setFilterByRating] = useState(0);
 
   const [filteredProductsData, setFilteredProductsData] = useState([]);
-  // const [searchParams, setSearchParams] = useSearchParams();
 
   const categoryInputRef = useRef([]);
 

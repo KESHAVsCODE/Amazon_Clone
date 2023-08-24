@@ -10,27 +10,27 @@ const CardDetails = ({
   const years = new Array(20).fill(0);
   const months = new Array(12).fill(0);
   const currentYear = new Date().getFullYear();
-  const currentMonth = new Date().getMonth();
+  const currentMonth = new Date().getMonth() + 1;
+  console.log(currentMonth);
 
   const [cardDetails, setCardDetails] = useState({
     cardNumber: "",
     nameOnCard: "",
-    expiryMonth: "01",
+    expiryMonth: currentMonth,
     expiryYear: currentYear,
   });
 
   const [cardDetailsErrors, setCardDetailsErrors] = useState({
     cardNumberError: "",
     nameOnCardError: "",
-    expiryMonthError: "",
-    expiryYearError: "",
+    cardExpiryError: "",
   });
 
   useEffect(() => {
     setCardDetails({
       cardNumber: paymentMethodDetails.details.cardNumber || "",
       nameOnCard: paymentMethodDetails.details.nameOnCard || "",
-      expiryMonth: paymentMethodDetails.details.expiryMonth || "01",
+      expiryMonth: paymentMethodDetails.details.expiryMonth || currentMonth,
       expiryYear: paymentMethodDetails.details.expiryYear || currentYear,
     });
   }, []);
@@ -51,19 +51,17 @@ const CardDetails = ({
           : "Enter a valid card number"
         : "Enter your card number",
       nameOnCardError: cardDetails.nameOnCard ? "" : "Enter name on card",
-      expiryMonthError: cardDetails.expiryMonth
-        ? Number(cardDetails.expiryMonth) < currentMonth
-          ? "Your card is expired"
-          : ""
-        : "Enter expiry month",
-      expiryYearError: cardDetails.expiryYear ? "" : "Enter expiry Year",
+      cardExpiryError:
+        Number(cardDetails.expiryMonth) < currentMonth &&
+        Number(cardDetails.expiryYear) <= currentYear
+          ? "Your card has expired"
+          : "",
     };
 
     if (
       errors.cardNumberError ||
       errors.nameOnCardError ||
-      errors.expiryMonthError ||
-      errors.expiryYearError
+      errors.cardExpiryError
     ) {
       setCardDetailsErrors({ ...errors });
       return;
@@ -155,23 +153,14 @@ const CardDetails = ({
               </option>
             ))}
           </select>
-          {cardDetailsErrors.expiryMonthError && (
+          {cardDetailsErrors.cardExpiryError && (
             <div className="flex gap-1 pt-1 items-center text-xs text-error opacity-90 ">
               <div>
                 <ErrorIcon style={{ fontSize: "22px" }} />
               </div>
-              <p>{cardDetailsErrors.expiryMonthError}</p>
+              <p>{cardDetailsErrors.cardExpiryError}</p>
             </div>
           )}
-          {!cardDetailsErrors.expiryMonthError &&
-            cardDetailsErrors.expiryYearError && (
-              <div className="flex gap-1 pt-1 items-center text-xs text-error opacity-90 ">
-                <div>
-                  <ErrorIcon style={{ fontSize: "22px" }} />
-                </div>
-                <p>{cardDetailsErrors.expiryYearError}</p>
-              </div>
-            )}
         </div>
         <button
           type="submit"

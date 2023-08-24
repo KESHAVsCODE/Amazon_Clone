@@ -15,7 +15,7 @@ const ListOfCards = () => {
     listOfCards.push(item);
   }
 
-  return <ul className="flex items-center gap-1 flex-wrap">{listOfCards}</ul>;
+  return <ul className="flex items-center gap-1 flex-wrap ">{listOfCards}</ul>;
 };
 
 export default ListOfCards;
