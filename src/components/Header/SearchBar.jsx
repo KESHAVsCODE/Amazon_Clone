@@ -6,7 +6,7 @@ const SearchBar = () => {
   const searchInputRef = useRef(null);
   const navigate = useNavigate();
   return (
-    <div className="flex h-10 flex-grow">
+    <form className="flex h-10 flex-grow" onSubmit={(e) => e.preventDefault()}>
       <input
         ref={searchInputRef}
         name="product-search"
@@ -14,18 +14,19 @@ const SearchBar = () => {
         type="text"
         placeholder="Search Amazon.in"
       />
-      <span
+      <button
+        type="submit"
         onClick={() =>
-          navigate("/filtered_products", {
-            state: { searchKey: searchInputRef.current?.value },
-          })
+          navigate(
+            `filtered_products?category=${searchInputRef.current?.value.toLowerCase()}`
+          )
         }
         className=" bg-amazon_yellow flex h-full w-12 items-center justify-center cursor-pointer 
                         rounded rounded-s-none hover:bg-[#f3a847]  text-amazon_blue"
       >
         <SearchIcon style={{ fontSize: "30px", color: "black" }} />
-      </span>
-    </div>
+      </button>
+    </form>
   );
 };
 

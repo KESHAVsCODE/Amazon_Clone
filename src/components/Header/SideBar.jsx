@@ -4,7 +4,14 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
+const productCategories = [
+  "Men's Clothing",
+  "Women's Clothing",
+  "Jewelery",
+  "Electronics",
+];
 // eslint-disable-next-line react/prop-types
 const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
   const userDetails = useSelector((state) => state.signinDetails.userDetails);
@@ -167,40 +174,25 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
               onClick={(e) => {
                 e.stopPropagation();
                 closeSideBar();
-                navigate("/filtered_products");
               }}
             >
-              <li className="sideBarItems">
-                <p className="">Mobiles, Computers</p>
-                <span>
-                  <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
-                </span>
-              </li>
-              <li className="sideBarItems">
-                <p className="">TV, Appliances, Electronics</p>
-                <span>
-                  <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
-                </span>
-              </li>
-              <li className="sideBarItems">
-                <p className="">Men&apos;s Fashion</p>
-                <span>
-                  <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
-                </span>
-              </li>
-              <li className="sideBarItems">
-                <p className="">Women&apos;s Fashion </p>
-                <span>
-                  <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
-                </span>
-              </li>
-
-              <li className="sideBarItems">
-                <p className="">See All</p>
-                <span>
-                  <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
-                </span>
-              </li>
+              <ul>
+                {productCategories.map((category) => {
+                  return (
+                    <li key={category}>
+                      <Link
+                        to={`filtered_products?category=${category.toLowerCase()}`}
+                        className="sideBarItems"
+                      >
+                        <p className="">{category}</p>
+                        <span>
+                          <ArrowForwardIosIcon style={{ fontSize: "18px" }} />
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
             </li>
 
             {/* ======== Line Break ======== */}

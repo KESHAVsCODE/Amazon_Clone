@@ -39,6 +39,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<CustomLayout />}>
             <Route index element={<Home />} />
+
             <Route
               path="youraccount"
               element={
@@ -48,8 +49,10 @@ const App = () => {
               }
             >
               <Route index element={<Account />} />
+
               <Route path="addresses" element={<Addresses />} />
               <Route path="addresses/add_address" element={<AddAddress />} />
+
               <Route path="orders" element={<Orders />} />
             </Route>
 

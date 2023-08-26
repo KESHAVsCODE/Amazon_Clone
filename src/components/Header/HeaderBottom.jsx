@@ -1,11 +1,19 @@
 /* eslint-disable react/prop-types */
 
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
 import DeliveryAddress from "./DeliveryAddress";
-const HeaderBottom = ({ openSideBar }) => {
-  const navigate = useNavigate();
+import { Link } from "react-router-dom";
+const productCategories = [
+  "Men's Clothing",
+  "Women's Clothing",
+  "Jewelery",
+  "Electronics",
+  "Skin Care & Beauty",
+  "Mobiles",
+  "Appliances",
+];
 
+const HeaderBottom = ({ openSideBar }) => {
   return (
     <section
       name="header-bottom"
@@ -20,17 +28,19 @@ const HeaderBottom = ({ openSideBar }) => {
           <span className="">All</span>
         </div>
 
-        <ul
-          className=" h-full flex-grow hidden mdl:flex"
-          onClick={() => navigate("/filtered_products")}
-        >
-          <li className="headerHover">Electronics</li>
-          <li className="headerHover">Men&apos;s Fashion</li>
-          <li className="headerHover">Women&apos;s Fashion</li>
-          <li className="headerHover">Jewellery</li>
-          <li className="headerHover">Skin Care & Beauty</li>
-          <li className="headerHover">Mobiles</li>
-          <li className="headerHover">Computers</li>
+        <ul className=" h-full flex-grow hidden mdl:flex">
+          {productCategories.map((category) => {
+            return (
+              <li key={category.toLowerCase()}>
+                <Link
+                  className="headerHover"
+                  to={`filtered_products?category=${category.toLowerCase()}`}
+                >
+                  {category}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
       <div className="flex pl-1  mdl:hidden">
