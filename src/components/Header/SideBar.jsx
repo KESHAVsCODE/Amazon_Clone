@@ -64,7 +64,7 @@ const SideBar = ({ setSideBarVisible: { closeSideBar, sideBarRef } }) => {
         </section>
 
         <section className="h-full w-full ">
-          <ul className=" overflow-y-scroll h-full w-full pt-[10px] pb-[100px]">
+          <ul className=" overflow-y-scroll overscroll-contain h-full w-full pt-[10px] pb-[100px]">
             <li>
               <h3 className="text-[18px] font-titleFont font-bold pt-3 pr-5 pb-1 pl-9">
                 Trending
